@@ -37,10 +37,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (type === 'home') {
       return L.divIcon({
         className: '',
-        html: `<div class="kv-pin home kv-pin-logo"><img src="assets/icons/logo.webp" alt=""></div>`,
-        iconSize: [30,30],
-        iconAnchor: [15,30],
-        popupAnchor: [0,-28],
+        html: `<div class="kv-pin home kv-pin-logo"><img src="assets/icons/logo-marker.webp" alt=""></div>`,
+        iconSize: [42,42],
+        iconAnchor: [21,42],
+        popupAnchor: [0,-40],
       });
     }
     const conf = ICONS[type] || ICONS.nature;
