@@ -1,0 +1,14 @@
+{
+    "name": "kvilda202-functions",
+    "description": "Firebase Cloud Functions - bezpecny proxy pro Tuya Cloud API",
+    "engines": {
+          "node": "20"
+    },
+    "main": "index.js",
+    "dependencies": {
+          "firebase-admin": "^12.1.0",
+          "firebase-functions": "^5.0.0",
+          "@tuya/tuya-connector-nodejs": "^2.1.0"
+    },
+    "private": true
+}
