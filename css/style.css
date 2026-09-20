@@ -210,7 +210,7 @@ nav.main-nav a:hover{ color:var(--white); }
   width:calc(100% + 52px); margin:-26px -26px 4px -26px; height:130px; object-fit:cover;
   border-radius:var(--radius) var(--radius) 0 0; filter:var(--photo-filter);
 }
-.tip-logo-dark{ background:var(--green-dark); } .tip-photo.tip-logo{
+.tip-photo.tip-logo.tip-logo-dark{ background:var(--green-dark); } .tip-photo.tip-logo{
     object-fit:contain; background:#fff; padding:18px; box-sizing:border-box; filter:none;
 }
 .tip-card h4{ margin-bottom:0; font-size:1.1rem; }
