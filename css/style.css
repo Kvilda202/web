@@ -17,7 +17,7 @@
   --radius:       14px;
   --maxw:         1180px;
   --serif: "Georgia", "Iowan Old Style", "Times New Roman", serif;
-  --sans: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+  --sans: "Inter", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
   --photo-filter: brightness(1.16) contrast(1.1) saturate(1.2);
 }
 
@@ -87,7 +87,7 @@ nav.main-nav a{ color:var(--cream); text-decoration:none; font-size:.92rem; font
 nav.main-nav a:hover{ color:var(--white); }
 .nav-phone{
   display:flex; align-items:center; gap:8px; background:var(--wood); color:var(--white)!important;
-  padding:14px 26px; border-radius:100px; font-weight:600!important; font-size:.88rem!important;
+  padding:20px 38px; border-radius:100px; font-weight:600!important; font-size:1.05rem!important;
 }
 .nav-toggle{ display:none; background:none; border:0; color:var(--white); font-size:1.6rem; cursor:pointer; }
 
