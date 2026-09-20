@@ -79,16 +79,23 @@ header.site-header{
 }
 .header-inner{ display:flex; align-items:center; justify-content:space-between; padding:10px 24px; max-width:var(--maxw); margin:0 auto; }
 .brand{ display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--white); }
-.brand img{ width:48px; height:48px; border-radius:50%; background:var(--cream); object-fit:contain; }
+.brand img{ width:64px; height:64px; border-radius:50%; background:var(--cream); object-fit:contain; }
 .brand-text{ font-family:var(--serif); font-size:1.25rem; line-height:1.1; }
 .brand-text small{ display:block; font-family:var(--sans); font-size:.62rem; letter-spacing:.15em; text-transform:uppercase; color:var(--cream-2); font-weight:600; }
 nav.main-nav{ display:flex; gap:26px; align-items:center; }
 nav.main-nav a{ color:var(--cream); text-decoration:none; font-size:.92rem; font-weight:500; position:relative; padding:6px 0; }
 nav.main-nav a:hover{ color:var(--white); }
 .nav-phone{
-  display:flex; align-items:center; gap:8px; background:var(--wood); color:var(--white)!important;
-  padding:20px 38px; border-radius:100px; font-weight:600!important; font-size:1.05rem!important;
-}
+       display:flex; align-items:center; color:var(--cream)!important; text-decoration:none;
+       font-weight:600!important; font-size:.95rem!important;
+  }
+   .nav-phone:hover{ color:var(--white)!important; }
+   .nav-admin{
+        display:flex; align-items:center; gap:6px; color:var(--cream)!important; text-decoration:none;
+        border:2px solid rgba(255,255,255,.55); border-radius:100px; padding:8px 18px;
+        font-weight:600; font-size:.85rem; margin-left:6px; transition:.2s ease;
+   }
+   .nav-admin:hover{ background:rgba(255,255,255,.14); color:var(--white)!important; border-color:var(--white); }
 .nav-toggle{ display:none; background:none; border:0; color:var(--white); font-size:1.6rem; cursor:pointer; }
 
 @media (max-width:900px){
@@ -185,6 +192,8 @@ nav.main-nav a:hover{ color:var(--white); }
 .kv-pin.nature{ background:var(--green); }
 .kv-pin.food{ background:#b5461f; }
 .kv-pin.ski{ background:#2166ac; }
+.kv-pin.kv-pin-logo{ background:#fff; }
+.kv-pin.kv-pin-logo img{ width:22px; height:22px; border-radius:50%; object-fit:cover; transform:rotate(45deg); }
 .leaflet-popup-content-wrapper{ border-radius:10px; }
 .leaflet-popup-content b{ color:var(--green-dark); }
 
@@ -195,16 +204,17 @@ nav.main-nav a:hover{ color:var(--white); }
 .tip-card.food{ border-bottom-color:#b5461f; }
 .tip-card.ski{ border-bottom-color:#2166ac; }
 .tip-icon{ width:46px; height:46px; border-radius:50%; background:var(--cream-2); display:flex; align-items:center; justify-content:center; font-size:1.4rem; }
+.tip-icon-row{ display:flex; gap:10px; }
+.tip-icon svg{ width:26px; height:26px; color:var(--wood); }
 .tip-photo{
   width:calc(100% + 52px); margin:-26px -26px 4px -26px; height:130px; object-fit:cover;
   border-radius:var(--radius) var(--radius) 0 0; filter:var(--photo-filter);
 }
 .tip-photo.tip-logo{
-  object-fit:contain; background:var(--cream-2); padding:18px; box-sizing:border-box; filter:none;
+    object-fit:contain; background:#fff; padding:18px; box-sizing:border-box; filter:none;
 }
 .tip-card h4{ margin-bottom:0; font-size:1.1rem; }
 .tip-dist{ font-size:.76rem; text-transform:uppercase; letter-spacing:.06em; color:var(--wood); font-weight:700; }
-.tip-card p{ font-size:.9rem; color:var(--text-soft); margin:0; flex:1; }
 .tip-card a.tip-link{ font-size:.85rem; font-weight:600; color:var(--green); text-decoration:none; }
 .tip-card a.tip-link:hover{ text-decoration:underline; }
 .tips-subhead{ margin:46px 0 18px; text-align:center; }
