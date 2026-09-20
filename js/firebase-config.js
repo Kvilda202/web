@@ -10,12 +10,12 @@
 // ==========================================================================
 
 window.KVILDA_FIREBASE_CONFIG = {
-  apiKey: "VLOZTE_apiKey",
-  authDomain: "VLOZTE_authDomain",       // např. kvilda202.firebaseapp.com
-  projectId: "VLOZTE_projectId",         // např. kvilda202
-  storageBucket: "VLOZTE_storageBucket",
-  messagingSenderId: "VLOZTE_messagingSenderId",
-  appId: "VLOZTE_appId",
+  apiKey: "AIzaSyDRi1Y-pcYHxk3yYQZDgBoMKMcbpJR7wDA",
+  authDomain: "kvilda202-68aab.firebaseapp.com",       // např. kvilda202.firebaseapp.com
+  projectId: "kvilda202-68aab",         // např. kvilda202
+  storageBucket: "kvilda202-68aab.firebasestorage.app",
+  messagingSenderId: "902867227317",
+  appId: "1:902867227317:web:eb09b479fc31d25a8ee4fc",
 };
 
 // E-mailové adresy, které smí spravovat kalendář (musí odpovídat
