@@ -207,8 +207,8 @@ nav.main-nav a:hover{ color:var(--white); }
 .kv-pin.nature{ background:var(--green); }
 .kv-pin.food{ background:#b5461f; }
 .kv-pin.ski{ background:#2166ac; }
-.kv-pin.kv-pin-logo{ background:#fff; }
-.kv-pin.kv-pin-logo img{ width:22px; height:22px; border-radius:50%; object-fit:cover; transform:rotate(45deg); }
+.kv-pin.kv-pin-logo{ background:#fff; width:42px; height:42px; }
+.kv-pin.kv-pin-logo img{ width:34px; height:34px; border-radius:50%; object-fit:cover; transform:rotate(45deg); }
 .leaflet-popup-content-wrapper{ border-radius:10px; }
 .leaflet-popup-content b{ color:var(--green-dark); }
 
