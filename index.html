@@ -47,12 +47,22 @@
 <!-- ============ HERO ============ -->
 <section class="hero" id="top">
   <div class="hero-inner">
-    <img src="assets/icons/logo.webp" alt="Kvilda 202" class="hero-logo">
-    <h1>Apartmán v srdci Šumavy, přímo na Kvildě</h1>
-    <p class="lead">Prostorné ubytování pro 4–6 osob, 80 m², vlastní parkování a uzamykatelná lyžárna. Ideální výchozí bod k prameni Vltavy, Modravě i skiareálu Zadov.</p>
-    <div class="hero-cta">
-      <a href="#rezervace" class="btn btn-primary">Rezervovat pobyt</a>
-      <a href="#galerie" class="btn btn-outline">Prohlédnout fotky</a>
+    <div class="hero-top">
+      <div class="hero-text">
+        <img src="assets/icons/logo.webp" alt="Kvilda 202" class="hero-logo">
+        <h1>Apartmán v srdci Šumavy, přímo na Kvildě</h1>
+        <p class="lead">Prostorné ubytování pro 4–6 osob, 80 m², vlastní parkování a uzamykatelná lyžárna. Ideální výchozí bod k prameni Vltavy, Modravě i skiareálu Zadov.</p>
+        <div class="hero-cta">
+          <a href="#rezervace" class="btn btn-primary">Rezervovat pobyt</a>
+          <a href="#galerie" class="btn btn-outline">Prohlédnout fotky</a>
+        </div>
+      </div>
+      <div class="hero-weather" id="hero-weather">
+        <span class="place">Kvilda, Šumava</span>
+        <div class="icon" id="weather-icon">⛅</div>
+        <div class="temp" id="weather-temp">–°C</div>
+        <div class="desc" id="weather-desc">Načítám počasí…</div>
+      </div>
     </div>
     <div class="hero-facts">
       <div class="hero-fact">80 m², 2 ložnice + gauč</div>
@@ -102,6 +112,10 @@
     <div class="gallery-grid">
       <figure class="big"><img src="assets/img/ext-fence-slunce.jpg" loading="lazy" alt="Výhled na zasněženou Šumavu od apartmánu"></figure>
       <figure><img src="assets/img/ext-vyhled-vesnice.jpg" loading="lazy" alt="Zimní výhled na obec Kvilda"></figure>
+      <figure><img src="assets/img/ext-vstup-cislo4.jpg" loading="lazy" alt="Vstup do apartmánu č. 4"></figure>
+      <figure><img src="assets/img/ext-stitovy-pohled.jpg" loading="lazy" alt="Štítový pohled na dům s balkony"></figure>
+      <figure class="big"><img src="assets/img/ext-celkovy-pohled.jpg" loading="lazy" alt="Celkový pohled na dům s výhledem do krajiny"></figure>
+      <figure><img src="assets/img/ext-terasa-vstup.jpg" loading="lazy" alt="Terasa a vstup ze zahrady"></figure>
       <figure><img src="assets/img/obyvak-kuchyn-1.jpg" loading="lazy" alt="Obývací pokoj s kuchyňským koutem"></figure>
       <figure><img src="assets/img/obyvak-kreslo-tv.jpg" loading="lazy" alt="Obývací pokoj s televizí a terasou"></figure>
       <figure class="big"><img src="assets/img/jidelna-schody-1.jpg" loading="lazy" alt="Jídelní stůl a točité schodiště"></figure>
@@ -275,7 +289,7 @@
         <a href="https://www.pekarnakvilda.cz" target="_blank" rel="noopener" class="tip-link">Web podniku →</a>
       </div>
       <div class="tip-card food" data-fly-to="nadivoko">
-        <img class="tip-photo tip-logo tip-logo-dark" src="assets/img/gastro/nadivoko-logo.png" alt="Logo Kvilda Nadivoko" loading="lazy">
+        <img class="tip-photo tip-logo" src="assets/img/gastro/nadivoko-logo-bw.png" alt="Logo Kvilda Nadivoko" loading="lazy">
         <h4>Kvilda Nadivoko</h4>
         <span class="tip-dist">v obci Kvilda</span>
         <p>Moderní šumavská restaurace s poctivou kuchyní z lokálních surovin a výhledem na horské louky.</p>
@@ -475,6 +489,7 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script><script src="js/firebase-config.js"></script>
 <script src="js/main.js"></script>
+<script src="js/weather.js"></script>
 <script src="js/map.js"></script>
 <script type="module" src="js/booking.js"></script>
 </body>
