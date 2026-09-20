@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const mapEl = document.getElementById('map');
   if (!mapEl || typeof L === 'undefined') return;
 
-  const KVILDA_202 = [49.0194, 13.5797]; // orientační poloha apartmánu (obec Kvilda)
+  const KVILDA_202 = [49.016101, 13.581747]; // přesná poloha domu Kvilda 202 (ne obecní úřad)
 
   const POIS = [
     { id:'home', type:'home', name:'Apartmán Kvilda 202', desc:'Váš výchozí bod pro výlety po Šumavě.', coords:KVILDA_202, link:null },
