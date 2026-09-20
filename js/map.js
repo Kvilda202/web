@@ -34,6 +34,15 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   function makeIcon(type) {
+    if (type === 'home') {
+      return L.divIcon({
+        className: '',
+        html: `<div class="kv-pin home kv-pin-logo"><img src="assets/icons/logo.webp" alt=""></div>`,
+        iconSize: [30,30],
+        iconAnchor: [15,30],
+        popupAnchor: [0,-28],
+      });
+    }
     const conf = ICONS[type] || ICONS.nature;
     return L.divIcon({
       className: '',
