@@ -33,6 +33,22 @@
   #admin-denied{ text-align:center; color:#a23; }
   #admin-not-configured{ background:#fff3e0; border-radius:10px; padding:18px; font-size:.88rem; color:#7a4a00; }
   a.back{ display:inline-block; margin-top:24px; font-size:.85rem; color:#29553b; }
+  .btn-mail{ background:#3a6ea5; color:#fff; border:0; padding:6px 12px; border-radius:8px; cursor:pointer; font-size:.78rem; margin-left:6px; }
+  .btn-mail:disabled{ background:#aab; cursor:not-allowed; }
+  .scenario-row{ display:flex; gap:12px; margin-bottom:18px; flex-wrap:wrap; }
+  .btn-scenario{ flex:1; min-width:220px; border:0; border-radius:12px; padding:16px; font-weight:700; font-size:.95rem; cursor:pointer; color:#fff; text-align:left; }
+  .btn-scenario small{ display:block; font-weight:500; opacity:.85; font-size:.78rem; margin-top:4px; }
+  .btn-scenario.arrival{ background:#c9722a; }
+  .btn-scenario.departure{ background:#3a6ea5; }
+  .btn-scenario:disabled{ opacity:.6; cursor:wait; }
+  #tuya-devices{ list-style:none; padding:0; margin:0 0 10px; display:flex; flex-direction:column; gap:6px; }
+  #tuya-devices li{ background:#f7f2e7; border-radius:8px; padding:8px 12px; display:flex; justify-content:space-between; align-items:center; font-size:.85rem; gap:10px; flex-wrap:wrap; }
+  #tuya-devices .dev-status{ font-size:.75rem; color:#888; }
+  #tuya-devices .dev-status.online{ color:#29553b; }
+  #tuya-devices .dev-controls{ display:flex; gap:6px; align-items:center; }
+  #tuya-devices input[type=number]{ width:58px; padding:5px 6px; border-radius:6px; border:1.5px solid #ddd4c0; font-size:.82rem; }
+  #tuya-status{ font-size:.8rem; color:#888; margin:-4px 0 14px; }
+  #scenario-log{ font-size:.78rem; color:#888; margin-top:6px; }
 </style>
 </head>
 <body>
@@ -87,12 +103,36 @@
           <input type="text" name="note" placeholder="např. Rezervováno – Novákovi">
         </div>
         <div class="full">
+          <label>E-mail hosta (nepovinné, pro odeslání potvrzení)</label>
+          <input type="email" name="guestEmail" placeholder="host@example.com">
+        </div>
+        <div class="full">
           <button type="submit" class="btn">Přidat blokovaný termín</button>
         </div>
       </form>
 
       <h3 style="font-size:1rem;">Aktuálně blokované termíny</h3>
       <ul id="block-list"></ul>
+
+      <h2 class="section-h">🏠 Chytrá domácnost (Tuya)</h2>
+      <p style="font-size:.85rem;color:#666;margin-top:-6px;">
+        Scénář 1 zapne topení a nastaví 22 °C, scénář 2 vše vypne a nastaví útlum 19 °C.
+        Automaticky se spouští 24 h před příjezdem hosta a po checkoutu (cca 12:00) – níže je lze spustit i ručně.
+      </p>
+      <div class="scenario-row">
+        <button id="btn-scenario-arrival" class="btn-scenario arrival" type="button">
+          🔥 Scénář 1 – Příjezd
+          <small>zapnout topení, nastavit 22 °C</small>
+        </button>
+        <button id="btn-scenario-departure" class="btn-scenario departure" type="button">
+          ❄️ Scénář 2 – Odjezd
+          <small>vypnout topení, útlum 19 °C</small>
+        </button>
+      </div>
+      <p id="tuya-status"></p>
+
+      <ul id="tuya-devices"></ul>
+      <div id="scenario-log"></div>
     </div>
 
     <a class="back" href="index.html">← zpět na web</a>

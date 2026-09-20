@@ -30,6 +30,16 @@ service cloud.firestore {
         ];
     }
 
+    // Log spuštěných scénářů chytré domácnosti (Tuya) – jen pro správce.
+    match /scenario_log/{logId} {
+      allow read: if request.auth != null &&
+        request.auth.token.email in [
+          'kvilda202@gmail.com',
+          'pavla.hraba@gmail.com'
+        ];
+      allow write: if false; // zapisují jen Cloud Functions (Admin SDK obchází pravidla)
+    }
+
     // Vše ostatní je uzavřené.
     match /{document=**} {
       allow read, write: if false;
