@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kvilda 202 – apartmán na Šumavě | ubytování Kvilda</title>
+<meta name="description" content="Apartmán Kvilda 202 – útulné ubytování pro 4–6 osob v srdci Šumavy, přímo v obci Kvilda. Blízko pramene Vltavy, Modravy, Jezerní slatě i skiareálu Zadov.">
+<meta name="theme-color" content="#1c3a29">
+<link rel="icon" href="assets/icons/logo.webp">
+<link rel="apple-touch-icon" href="assets/icons/logo.webp">
+
+<meta property="og:title" content="Kvilda 202 – apartmán na Šumavě">
+<meta property="og:description" content="Útulný apartmán pro 4–6 osob v srdci Šumavy, obec Kvilda. Rezervace na kvilda202@gmail.com nebo 606 080 413.">
+<meta property="og:image" content="assets/img/ext-fence-slunce.jpg">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://unpkg.com">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="#top" class="brand">
+      <img src="assets/icons/logo.webp" alt="Kvilda 202 – logo">
+      <span class="brand-text">Kvilda 202<small>Apartmány na Šumavě</small></span>
+    </a>
+    <nav class="main-nav">
+      <a href="#o-apartmanu">O apartmánu</a>
+      <a href="#galerie">Galerie</a>
+      <a href="#cenik">Ceník</a>
+      <a href="#mapa">Mapa a okolí</a>
+      <a href="#vylety">Tipy na výlety</a>
+      <a href="#aktuality">Aktuality</a>
+      <a href="#rezervace" class="nav-phone"><span class="bullet-3d"></span> 606 080 413</a>
+    </nav>
+    <button class="nav-toggle" aria-label="Menu">☰</button>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <img src="assets/icons/logo.webp" alt="Kvilda 202" class="hero-logo">
+    <h1>Apartmán v srdci Šumavy, přímo na Kvildě</h1>
+    <p class="lead">Prostorné ubytování pro 4–6 osob, 80 m², vlastní parkování a uzamykatelná lyžárna. Ideální výchozí bod k prameni Vltavy, Modravě i skiareálu Zadov.</p>
+    <div class="hero-cta">
+      <a href="#rezervace" class="btn btn-primary">Rezervovat pobyt</a>
+      <a href="#galerie" class="btn btn-outline">Prohlédnout fotky</a>
+    </div>
+    <div class="hero-facts">
+      <div class="hero-fact"><span class="bullet-3d"></span> 80 m², 2 ložnice + gauč</div>
+      <div class="hero-fact"><span class="bullet-3d"></span> Parkování u domu</div>
+      <div class="hero-fact"><span class="bullet-3d"></span> Lyžárna / kolárna</div>
+      <div class="hero-fact"><span class="bullet-3d"></span> Mazlíčci vítáni</div>
+    </div>
+  </div>
+  <div class="scroll-cue">Posuňte dolů ↓</div>
+</section>
+
+<!-- ============ O APARTMÁNU ============ -->
+<section id="o-apartmanu" data-apt="apt1">
+  <div class="container about-grid">
+    <div class="reveal">
+      <span class="badge">Apartmán 1 · Kvilda 202</span>
+      <h2 style="text-align:left;">Domov v srdci Národního parku Šumava</h2>
+      <p>Moderně zařízený apartmán o rozloze cca <b>80 m²</b> se nachází přímo v obci Kvilda – nejvýše položené obci v Česku. Kombinuje dřevo, přírodní materiály a plnou vybavenost s výhledem do šumavské krajiny. Skvělá základna pro turistiku, cykloturistiku i zimní lyžování.</p>
+      <div class="stat-row">
+        <div class="stat"><b>4–6</b><span>osob</span></div>
+        <div class="stat"><b>2+2</b><span>ložnice</span></div>
+        <div class="stat"><b>80 m²</b><span>plocha</span></div>
+        <div class="stat"><b>3</b><span>min. nocí</span></div>
+      </div>
+      <ul class="feature-list">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16M4 6h16M4 18h16"/></svg> Plně vybavená kuchyň s troubou a myčkou</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/></svg> Wi-Fi zdarma v celém apartmánu</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13l2-7h14l2 7M5 13h14v6H5z"/></svg> Vlastní parkovací místo před domem</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 21V9l8-6 8 6v12"/></svg> Uzamykatelná lyžárna / kolárna</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-4.5-7-10a7 7 0 0114 0c0 5.5-7 10-7 10z"/></svg> Vhodné pro rodiny s dětmi</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"/></svg> Nekuřácký apartmán</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M2 12h4M18 12h4M12 2v4M12 18v4"/></svg> 2 koupelny + samostatné WC</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l2-2m0 0l7-7 7 7m-9-5v14"/></svg> Mazlíčci vítáni po předchozí domluvě</li>
+      </ul>
+    </div>
+    <img src="assets/img/obyvak-kreslo-tv.jpg" alt="Obývací pokoj apartmánu Kvilda 202" class="reveal">
+  </div>
+</section>
+
+<!-- ============ GALERIE ============ -->
+<section id="galerie">
+  <div class="container">
+    <span class="badge" style="display:block;text-align:center;width:fit-content;margin-left:auto;margin-right:auto;">Fotogalerie</span>
+    <h2 class="section-title">Podívejte se dovnitř</h2>
+    <p class="section-lead">Apartmán 1 · Kvilda 202 – kompletní fotogalerie.</p>
+
+    <div class="gallery-grid">
+      <figure class="big"><img src="assets/img/ext-fence-slunce.jpg" loading="lazy" alt="Výhled na zasněženou Šumavu od apartmánu"></figure>
+      <figure><img src="assets/img/ext-vyhled-vesnice.jpg" loading="lazy" alt="Zimní výhled na obec Kvilda"></figure>
+      <figure><img src="assets/img/obyvak-kuchyn-1.jpg" loading="lazy" alt="Obývací pokoj s kuchyňským koutem"></figure>
+      <figure><img src="assets/img/obyvak-kreslo-tv.jpg" loading="lazy" alt="Obývací pokoj s televizí a terasou"></figure>
+      <figure class="big"><img src="assets/img/jidelna-schody-1.jpg" loading="lazy" alt="Jídelní stůl a točité schodiště"></figure>
+      <figure><img src="assets/img/jidelna-kuchyn-2.jpg" loading="lazy" alt="Jídelní kout a kuchyně"></figure>
+      <figure><img src="assets/img/kuchyn-detail.jpg" loading="lazy" alt="Detail kuchyňské linky"></figure>
+      <figure><img src="assets/img/kuchyn-jidelna-3.jpg" loading="lazy" alt="Kuchyně s jídelnou"></figure>
+      <figure><img src="assets/img/chodba-vstup.jpg" loading="lazy" alt="Vstupní chodba se šatnou"></figure>
+      <figure><img src="assets/img/chodba-wc.jpg" loading="lazy" alt="Chodba se vstupem na WC"></figure>
+      <figure><img src="assets/img/wc-prizemi.jpg" loading="lazy" alt="WC v přízemí"></figure>
+      <figure class="big"><img src="assets/img/schodiste-1.jpg" loading="lazy" alt="Točité dřevěné schodiště"></figure>
+      <figure><img src="assets/img/schodiste-2.jpg" loading="lazy" alt="Pohled na schodiště shora"></figure>
+      <figure><img src="assets/img/schodiste-3.jpg" loading="lazy" alt="Detail dřevěného schodiště"></figure>
+      <figure><img src="assets/img/loznice-a-1.jpg" loading="lazy" alt="Ložnice s manželskou postelí"></figure>
+      <figure><img src="assets/img/loznice-a-skrin.jpg" loading="lazy" alt="Ložnice se šatní skříní"></figure>
+      <figure class="big"><img src="assets/img/loznice-a-balkon.jpg" loading="lazy" alt="Ložnice s výhledem a balkonem"></figure>
+      <figure><img src="assets/img/koupelna-2-umyvadlo.jpg" loading="lazy" alt="Koupelna s umyvadlem"></figure>
+      <figure><img src="assets/img/koupelna-2-sprcha.jpg" loading="lazy" alt="Koupelna se sprchovým koutem"></figure>
+      <figure><img src="assets/img/loznice-a-celek.jpg" loading="lazy" alt="Celkový pohled na ložnici"></figure>
+    </div>
+  </div>
+</section>
+
+<!-- lightbox -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close">✕</button>
+  <button class="lightbox-nav prev">‹</button>
+  <img src="" alt="Zvětšená fotografie">
+  <button class="lightbox-nav next">›</button>
+</div>
+
+<!-- ============ CENÍK ============ -->
+<section id="cenik" class="alt">
+  <div class="container">
+    <span class="badge" style="display:block;text-align:center;width:fit-content;margin-left:auto;margin-right:auto;">Ceník</span>
+    <h2 class="section-title">Kolik pobyt stojí</h2>
+    <p class="section-lead">Cena je za celý apartmán (ne za osobu) včetně DPH. Minimální délka pobytu jsou 3 noci.</p>
+
+    <div class="price-grid">
+      <div class="price-card season">
+        <span class="badge">Hlavní sezóna</span>
+        <div class="amount">5 000 Kč<span>/ noc</span></div>
+        <ul>
+          <li>1. 12. – 31. 3. (zimní / lyžařská sezóna)</li>
+          <li>1. 7. – 31. 8. (letní prázdniny)</li>
+          <li>Vánoce, Silvestr, Velikonoce</li>
+        </ul>
+      </div>
+      <div class="price-card">
+        <span class="badge" style="background:var(--green);">Mimo sezónu</span>
+        <div class="amount">4 000 Kč<span>/ noc</span></div>
+        <ul>
+          <li>Duben, květen, červen</li>
+          <li>Září, říjen, listopad</li>
+          <li>Ideální na klidnou dovolenou</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="price-note">
+      <p><b>Sezónní období vycházejí z obvyklých termínů v okolí Kvildy</b> (srovnatelně s okolními apartmány na Kvildě) a přesné datum vždy potvrdíme při rezervaci. V ceně je zahrnuto parkování a využití lyžárny/kolárny. Kauce a storno podmínky upřesníme e-mailem po odeslání poptávky.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MAPA ============ -->
+<section id="mapa">
+  <div class="container">
+    <span class="badge" style="display:block;text-align:center;width:fit-content;margin-left:auto;margin-right:auto;">Poloha</span>
+    <h2 class="section-title">Kde nás najdete</h2>
+    <p class="section-lead">Vlastní mapa s vyznačenými zajímavými místy v okolí. Přepněte mezi letní (turistika, cyklo) a zimní (sjezdovky, běžky) vrstvou.</p>
+
+    <div class="map-toolbar">
+      <button data-season="leto" class="active"><span class="bullet-3d"></span> Léto – turistika a cyklo</button>
+      <button data-season="zima"><span class="bullet-3d"></span> Zima – sjezdovky a běžky</button>
+    </div>
+
+    <div id="map"></div>
+
+    <div class="map-legend">
+      <span><i class="legend-dot" style="background:var(--wood);"></i> Apartmán Kvilda 202</span>
+      <span><i class="legend-dot" style="background:var(--green);"></i> Příroda a výlety</span>
+      <span><i class="legend-dot" style="background:#b5461f;"></i> Restaurace</span>
+      <span><i class="legend-dot" style="background:#2166ac;"></i> Lyžování</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TIPY NA VÝLETY ============ -->
+<section id="vylety" class="alt">
+  <div class="container">
+    <span class="badge" style="display:block;text-align:center;width:fit-content;margin-left:auto;margin-right:auto;">Okolí</span>
+    <h2 class="section-title">Tipy na výlety a gastronomii</h2>
+    <p class="section-lead">To nejzajímavější v okolí Kvildy – klikněte na kartu a ukážeme vám místo na mapě výše.</p>
+
+    <div class="tips-grid">
+      <div class="tip-card" data-fly-to="pramen-vltavy">
+        <img class="tip-photo" src="assets/img/tips/pramen-vltavy.jpg" alt="Pramen Vltavy" loading="lazy">
+        <h4>Pramen Vltavy</h4>
+        <span class="tip-dist">cca 5,5 km</span>
+        <p>Symbolický pramen nejdelší české řeky u zaniklé obce Bučina, přístupný po modré značce nebo cyklotrase.</p>
+        <a href="#mapa" class="tip-link">Zobrazit na mapě →</a>
+      </div>
+      <div class="tip-card" data-fly-to="modrava">
+        <img class="tip-photo" src="assets/img/tips/modrava.jpg" alt="Modrava" loading="lazy">
+        <h4>Modrava</h4>
+        <span class="tip-dist">cca 8 km</span>
+        <p>Malebná horská osada a výchozí bod k Rokytské slati, Vydře a naučným stezkám NP Šumava.</p>
+        <a href="#mapa" class="tip-link">Zobrazit na mapě →</a>
+      </div>
+      <div class="tip-card" data-fly-to="jezerni-slat">
+        <img class="tip-photo" src="assets/img/tips/jezerni-slat.jpg" alt="Jezerní slať" loading="lazy">
+        <h4>Jezerní slať</h4>
+        <span class="tip-dist">cca 3 km</span>
+        <p>Rašeliniště s naučnou stezkou a dřevěnými chodníčky mezi Kvildou a Horskou Kvildou.</p>
+        <a href="#mapa" class="tip-link">Zobrazit na mapě →</a>
+      </div>
+      <div class="tip-card" data-fly-to="bucina">
+        <img class="tip-photo" src="assets/img/tips/bucina.jpg" alt="Bučina" loading="lazy">
+        <h4>Bučina</h4>
+        <span class="tip-dist">cca 6 km</span>
+        <p>Zaniklá pohraniční obec s replikou drátěných zátarasů a kapličkou sv. Michala, silný genius loci.</p>
+        <a href="#mapa" class="tip-link">Zobrazit na mapě →</a>
+      </div>
+      <div class="tip-card" data-fly-to="knizeci-plane">
+        <img class="tip-photo" src="assets/img/tips/knizeci-plane.jpg" alt="Knížecí Pláně" loading="lazy">
+        <h4>Knížecí Pláně</h4>
+        <span class="tip-dist">cca 8 km</span>
+        <p>Zaniklá osada s obnoveným hřbitovem uprostřed rozlehlých šumavských plání.</p>
+        <a href="#mapa" class="tip-link">Zobrazit na mapě →</a>
+      </div>
+      <div class="tip-card" data-fly-to="luzny">
+        <img class="tip-photo" src="assets/img/tips/luzny.jpg" alt="Luzný" loading="lazy">
+        <h4>Luzný (1 373 m)</h4>
+        <span class="tip-dist">cca 12 km</span>
+        <p>Výrazná hora s obřím kamenným mořem na vrcholu, na německé straně Šumavy.</p>
+        <a href="#mapa" class="tip-link">Zobrazit na mapě →</a>
+      </div>
+      <div class="tip-card" data-fly-to="horska-kvilda">
+        <img class="tip-photo" src="assets/img/tips/horska-kvilda.jpg" alt="Horská Kvilda" loading="lazy">
+        <h4>Horská Kvilda</h4>
+        <span class="tip-dist">cca 5 km</span>
+        <p>Sousední horská obec, oblíbený cíl běžkařů v zimě a cyklistů v létě.</p>
+        <a href="#mapa" class="tip-link">Zobrazit na mapě →</a>
+      </div>
+      <div class="tip-card" data-fly-to="borova-lada">
+        <img class="tip-photo" src="assets/img/tips/borova-lada.jpg" alt="Borová Lada" loading="lazy">
+        <h4>Borová Lada</h4>
+        <span class="tip-dist">cca 9 km</span>
+        <p>Sousední obec na křižovatce turistických a cyklotras, s rozhlednou v okolí.</p>
+        <a href="#mapa" class="tip-link">Zobrazit na mapě →</a>
+      </div>
+      <div class="tip-card" data-fly-to="vybeh-rysu">
+        <div class="tip-icon"><span class="bullet-3d-lg"></span></div>
+        <h4>Jelení a rysí výběh</h4>
+        <span class="tip-dist">cca 1,5 km</span>
+        <p>Návštěvnické centrum NP Šumava s bezbariérovou stezkou a vyhlídkovými věžemi. Vstup zdarma, platí se jen parkovné.</p>
+        <a href="#mapa" class="tip-link">Zobrazit na mapě →</a>
+      </div>
+    </div>
+
+    <h3 class="tips-subhead">Kam na jídlo a pití</h3>
+    <div class="tips-grid">
+      <div class="tip-card food" data-fly-to="pivovar">
+        <img class="tip-photo" src="assets/img/gastro/pivovar-kvilda.jpg" alt="Pekárna a pivovar Kvilda" loading="lazy">
+        <h4>Pekárna a pivovar Kvilda</h4>
+        <span class="tip-dist">v obci Kvilda</span>
+        <p>Rodinný minipivovar s 30letou tradicí, vlastní pekárnou a restaurací s domácí kuchyní.</p>
+        <a href="https://www.pekarnakvilda.cz" target="_blank" rel="noopener" class="tip-link">Web podniku →</a>
+      </div>
+      <div class="tip-card food" data-fly-to="nadivoko">
+        <img class="tip-photo tip-logo" src="assets/img/gastro/nadivoko-logo.png" alt="Logo Kvilda Nadivoko" loading="lazy">
+        <h4>Kvilda Nadivoko</h4>
+        <span class="tip-dist">v obci Kvilda</span>
+        <p>Moderní šumavská restaurace s poctivou kuchyní z lokálních surovin a výhledem na horské louky.</p>
+        <a href="https://www.kvilda-nadivoko.cz" target="_blank" rel="noopener" class="tip-link">Web podniku →</a>
+      </div>
+      <div class="tip-card food" data-fly-to="sumava-inn">
+        <img class="tip-photo tip-logo" src="assets/img/gastro/sumava-inn-logo.svg" alt="Logo Šumava Inn" loading="lazy">
+        <h4>Hotel a restaurace Šumava Inn</h4>
+        <span class="tip-dist">v obci Kvilda</span>
+        <p>Staročeská šumavská kuchyně, zvěřina i mezinárodní jídla, jen pár set metrů od sjezdovky.</p>
+        <a href="https://www.sumavainn.cz/cz/" target="_blank" rel="noopener" class="tip-link">Web podniku →</a>
+      </div>
+    </div>
+
+    <h3 class="tips-subhead">Lyžování a zimní sporty</h3>
+    <div class="tips-grid">
+      <div class="tip-card ski" data-fly-to="zadov-ski">
+        <img class="tip-photo" src="assets/img/tips/zadov.jpg" alt="Skiareál Zadov" loading="lazy">
+        <h4>Skiareál Zadov–Churáňov</h4>
+        <span class="tip-dist">cca 12 km</span>
+        <p>Největší lyžařské středisko na Šumavě – sjezdovky, vleky i síť upravovaných běžeckých stop.</p>
+        <a href="https://www.lazadov.cz/" target="_blank" rel="noopener" class="tip-link">Web areálu →</a>
+      </div>
+      <div class="tip-card ski" data-fly-to="zadov-rozhledna">
+        <img class="tip-photo" src="assets/img/tips/rozhledna-zadov.jpg" alt="Rozhledna Zadov" loading="lazy">
+        <h4>Rozhledna Zadov</h4>
+        <span class="tip-dist">cca 12 km</span>
+        <p>Unikátní vyhlídková plošina na bývalém skokanském můstku, 32 metrů nad zemí.</p>
+        <a href="https://www.lazadov.cz/la/leto-rozhledna.asp" target="_blank" rel="noopener" class="tip-link">Více info →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AKTUALITY ============ -->
+<section id="aktuality">
+  <div class="container">
+    <span class="badge" style="display:block;text-align:center;width:fit-content;margin-left:auto;margin-right:auto;">Co se děje v okolí</span>
+    <h2 class="section-title">Aktuality z Kvildy a okolí</h2>
+    <p class="section-lead">Oficiální weby obcí bohužel nenabízí RSS kanál pro automatické napojení – proto vám nabízíme přímé odkazy na jejich živé stránky s aktualitami a kalendářem akcí.</p>
+
+    <div class="news-grid">
+      <a class="news-card" href="https://www.obeckvilda.cz/kvilda/kalendar-akci.asp" target="_blank" rel="noopener">
+        <span class="src">Obec Kvilda</span>
+        <h4>Kalendář akcí a Muzeum Kvilda</h4>
+        <p>Přednášky, výstavy, tvořivé dílny a další akce pořádané obcí a Muzeem Kvilda.</p>
+      </a>
+      <a class="news-card" href="https://horskakvilda.eu" target="_blank" rel="noopener">
+        <span class="src">Obec Horská Kvilda</span>
+        <h4>Novinky z Horské Kvildy</h4>
+        <p>Oficiální informace, úřední deska a dění v sousední horské obci.</p>
+      </a>
+      <a class="news-card" href="https://www.npsumava.cz/aktuality/" target="_blank" rel="noopener">
+        <span class="src">NP Šumava</span>
+        <h4>Aktuality Národního parku Šumava</h4>
+        <p>Uzávěry cest, stav sněhu, ochrana přírody a novinky ze Správy NP Šumava.</p>
+      </a>
+      <a class="news-card" href="https://www.obeckvilda.cz/kvilda/webcam.asp" target="_blank" rel="noopener">
+        <span class="src">Obec Kvilda</span>
+        <h4>Webkamery a počasí</h4>
+        <p>Aktuální stav sněhu a počasí přímo na Kvildě – vždy před cestou mrkněte na kameru.</p>
+      </a>
+      <a class="news-card" href="https://www.lazadov.cz/" target="_blank" rel="noopener">
+        <span class="src">Skiareál Zadov</span>
+        <h4>Sněhové zpravodajství</h4>
+        <p>Provoz vleků, upravené sjezdovky a stopy pro běžecké lyžování.</p>
+      </a>
+      <a class="news-card" href="https://www.obeckvilda.cz/kvilda/okoli.asp" target="_blank" rel="noopener">
+        <span class="src">Obec Kvilda</span>
+        <h4>Tipy na výlety od obce</h4>
+        <p>Oficiální doporučené výlety a turistické cíle v okolí Kvildy.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REZERVACE ============ -->
+<section id="rezervace">
+  <div class="container">
+    <span class="badge">Rezervace</span>
+    <h2 class="section-title">Zjistěte volný termín a napište nám</h2>
+    <p class="section-lead">Kalendář obsazenosti se aktualizuje automaticky. Poptávku vyřídíme e-mailem nejpozději do 24 hodin.</p>
+
+    <div style="margin-bottom:50px;">
+      <div class="cal-apartment-picker">
+        <label for="cal-apartment" style="align-self:center;font-weight:600;color:var(--text-soft);font-size:.85rem;">Apartmán:</label>
+        <select id="cal-apartment"></select>
+      </div>
+      <div id="booking-calendar"></div>
+      <p class="news-status" id="booking-status" style="color:var(--text-soft);"></p>
+    </div>
+
+    <div class="reserve-wrap">
+      <div class="reserve-info">
+        <h3>Apartmán Kvilda 202</h3>
+        <p>Kvilda 202, 384 93 Kvilda, Šumava</p>
+        <ul>
+          <li>Sezóna: 5 000 Kč / noc · mimo sezónu: 4 000 Kč / noc</li>
+          <li>Minimální délka pobytu: 3 noci</li>
+          <li>Parkování a lyžárna/kolárna v ceně</li>
+          <li>Mazlíčci vítáni po domluvě</li>
+        </ul>
+        <div class="contact-box">
+          <a href="tel:+420606080413"><span class="bullet-3d"></span> 606 080 413</a>
+          <a href="mailto:kvilda202@gmail.com"><span class="bullet-3d"></span> kvilda202@gmail.com</a>
+        </div>
+      </div>
+
+      <form id="reserve-form" action="https://formsubmit.co/kvilda202@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="Nová poptávka – Kvilda 202">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="true">
+        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+
+        <div class="form-field">
+          <label>Apartmán</label>
+          <select id="reserve-apartment" name="Apartmán" required></select>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label>Jméno a příjmení</label>
+            <input type="text" name="Jméno" required>
+          </div>
+          <div class="form-field">
+            <label>Telefon</label>
+            <input type="tel" name="Telefon" required>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label>E-mail</label>
+          <input type="email" name="E-mail" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label>Příjezd</label>
+            <input type="date" name="Příjezd" required>
+          </div>
+          <div class="form-field">
+            <label>Odjezd</label>
+            <input type="date" name="Odjezd" required>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label>Počet osob</label>
+          <input type="number" name="Počet osob" min="1" max="6" value="2" required>
+        </div>
+
+        <div class="form-field">
+          <label>Zpráva (nepovinné)</label>
+          <textarea name="Zpráva" rows="4" placeholder="Např. dotaz na mazlíčky, přistýlku apod."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-green" style="width:100%;">Odeslat poptávku</button>
+        <p id="form-feedback"></p>
+        <p class="form-note">Odesláním poptávky souhlasíte se zpracováním uvedených údajů pouze za účelem vyřízení rezervace. Poptávka je závazná až po potvrzení e-mailem.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4>Kvilda 202</h4>
+        <p style="font-size:.88rem;max-width:280px;">Apartmány v srdci Šumavy, přímo v nejvýše položené obci Česka. Klidné ubytování pro celou rodinu, celoročně.</p>
+      </div>
+      <div>
+        <h4>Rychlé odkazy</h4>
+        <ul>
+          <li><a href="#o-apartmanu">O apartmánu</a></li>
+          <li><a href="#galerie">Galerie</a></li>
+          <li><a href="#cenik">Ceník</a></li>
+          <li><a href="#mapa">Mapa a okolí</a></li>
+          <li><a href="#rezervace">Rezervace</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Kontakt</h4>
+        <ul>
+          <li><a href="tel:+420606080413"><span class="bullet-3d"></span> 606 080 413</a></li>
+          <li><a href="mailto:kvilda202@gmail.com"><span class="bullet-3d"></span> kvilda202@gmail.com</a></li>
+          <li>Kvilda 202, 384 93 Kvilda</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © <span id="year"></span> Kvilda 202. Mapové podklady: OpenStreetMap, Waymarked Trails, OpenSnowMap.
+    </div>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script><script src="js/firebase-config.js"></script>
+<script src="js/main.js"></script>
+<script src="js/map.js"></script>
+<script type="module" src="js/booking.js"></script>
+</body>
+</html>

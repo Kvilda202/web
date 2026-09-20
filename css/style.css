@@ -1,0 +1,300 @@
+/* ==========================================================================
+   Kvilda 202 – styly webu
+   ========================================================================== */
+
+:root{
+  --green-dark:   #1c3a29;
+  --green:        #29553b;
+  --green-light:  #3f7754;
+  --cream:        #f7f2e7;
+  --cream-2:      #efe6d3;
+  --wood:         #a9784f;
+  --wood-dark:    #6b4a30;
+  --text:         #2a2b23;
+  --text-soft:    #55584c;
+  --white:        #ffffff;
+  --shadow:       0 10px 30px rgba(28,58,41,.15);
+  --radius:       14px;
+  --maxw:         1180px;
+  --serif: "Georgia", "Iowan Old Style", "Times New Roman", serif;
+  --sans: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+  --photo-filter: brightness(1.16) contrast(1.1) saturate(1.2);
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  margin:0;
+  font-family:var(--sans);
+  color:var(--text);
+  background:var(--cream);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+img{ max-width:100%; display:block; }
+a{ color:inherit; }
+.container{ max-width:var(--maxw); margin:0 auto; padding:0 24px; }
+h1,h2,h3,h4{ font-family:var(--serif); color:var(--green-dark); line-height:1.15; margin:0 0 .5em; }
+h2.section-title{ font-size:clamp(1.7rem,3.2vw,2.4rem); text-align:center; margin-bottom:.3em; }
+p.section-lead{ text-align:center; max-width:640px; margin:0 auto 2.5em; color:var(--text-soft); }
+section{ padding:72px 0; }
+section.alt{ background:var(--cream-2); }
+.badge{
+  display:inline-block; background:var(--green); color:var(--white);
+  font-size:.72rem; letter-spacing:.12em; text-transform:uppercase;
+  padding:6px 14px; border-radius:100px; margin-bottom:14px; font-weight:600;
+}
+.btn{
+  display:inline-flex; align-items:center; gap:8px; justify-content:center;
+  padding:14px 26px; border-radius:100px; font-weight:600; text-decoration:none;
+  border:2px solid transparent; cursor:pointer; font-size:1rem; transition:.2s ease;
+  font-family:var(--sans);
+}
+.btn-primary{ background:var(--wood); color:var(--white); }
+.btn-primary:hover{ background:var(--wood-dark); transform:translateY(-2px); }
+.btn-outline{ background:transparent; border-color:var(--white); color:var(--white); }
+.btn-outline:hover{ background:rgba(255,255,255,.15); }
+.btn-green{ background:var(--green); color:var(--white); }
+.btn-green:hover{ background:var(--green-dark); transform:translateY(-2px); }
+.btn:disabled{ opacity:.6; cursor:not-allowed; transform:none !important; }
+
+/* ---------- 3D odrážky (jednotná náhrada za emoji ikony) ---------- */
+.bullet-3d{
+  display:inline-block; flex:none; width:.62em; height:.62em; border-radius:50%;
+  background: radial-gradient(circle at 32% 28%, #f3dfc0 0%, var(--wood) 48%, var(--wood-dark) 100%);
+  box-shadow: 0 1px 2px rgba(0,0,0,.35), inset 0 1px 1px rgba(255,255,255,.55);
+  vertical-align:middle; margin-right:.1em;
+}
+.bullet-3d-lg{
+  width:22px; height:22px; border-radius:50%;
+  background: radial-gradient(circle at 32% 28%, #f3dfc0 0%, var(--wood) 48%, var(--wood-dark) 100%);
+  box-shadow: 0 2px 4px rgba(0,0,0,.3), inset 0 1px 2px rgba(255,255,255,.6);
+}
+
+/* ---------- Header ---------- */
+header.site-header{
+  position:fixed; top:0; left:0; right:0; z-index:1000;
+  background:rgba(28,58,41,.92); backdrop-filter:blur(6px);
+  transition:.25s ease;
+}
+.header-inner{ display:flex; align-items:center; justify-content:space-between; padding:10px 24px; max-width:var(--maxw); margin:0 auto; }
+.brand{ display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--white); }
+.brand img{ width:48px; height:48px; border-radius:50%; background:var(--cream); object-fit:contain; }
+.brand-text{ font-family:var(--serif); font-size:1.25rem; line-height:1.1; }
+.brand-text small{ display:block; font-family:var(--sans); font-size:.62rem; letter-spacing:.15em; text-transform:uppercase; color:var(--cream-2); font-weight:600; }
+nav.main-nav{ display:flex; gap:26px; align-items:center; }
+nav.main-nav a{ color:var(--cream); text-decoration:none; font-size:.92rem; font-weight:500; position:relative; padding:6px 0; }
+nav.main-nav a:hover{ color:var(--white); }
+.nav-phone{
+  display:flex; align-items:center; gap:8px; background:var(--wood); color:var(--white)!important;
+  padding:9px 16px; border-radius:100px; font-weight:600!important; font-size:.88rem!important;
+}
+.nav-toggle{ display:none; background:none; border:0; color:var(--white); font-size:1.6rem; cursor:pointer; }
+
+@media (max-width:900px){
+  nav.main-nav{
+    position:fixed; inset:64px 0 0 0; background:var(--green-dark); flex-direction:column;
+    padding:30px 24px; gap:22px; transform:translateX(100%); transition:.3s ease; overflow-y:auto;
+  }
+  nav.main-nav.open{ transform:translateX(0); }
+  .nav-toggle{ display:block; }
+}
+
+/* ---------- Hero ---------- */
+.hero{
+  position:relative; min-height:100vh; display:flex; align-items:center; color:var(--white);
+  background:linear-gradient(180deg, rgba(15,30,21,.55), rgba(15,30,21,.75)), url("../assets/img/ext-fence-slunce.jpg") center/cover no-repeat;
+}
+.hero-inner{ max-width:var(--maxw); margin:0 auto; padding:140px 24px 80px; width:100%; }
+.hero-logo{ width:110px; height:110px; border-radius:50%; background:var(--cream); padding:6px; margin-bottom:22px; box-shadow:var(--shadow); object-fit:contain; }
+.hero h1{ color:var(--white); font-size:clamp(2.2rem,5vw,3.6rem); max-width:780px; margin-bottom:.25em; }
+.hero p.lead{ font-size:1.15rem; max-width:560px; color:var(--cream-2); margin-bottom:2em; }
+.hero-cta{ display:flex; flex-wrap:wrap; gap:16px; }
+.hero-facts{ display:flex; flex-wrap:wrap; gap:28px; margin-top:56px; }
+.hero-fact{ display:flex; align-items:center; gap:10px; font-size:.95rem; color:var(--cream-2); }
+.hero-fact svg{ width:22px; height:22px; flex:none; }
+.scroll-cue{ position:absolute; bottom:26px; left:50%; transform:translateX(-50%); color:var(--cream-2); font-size:.8rem; letter-spacing:.15em; text-transform:uppercase; opacity:.8; }
+
+/* ---------- O apartmánu ---------- */
+.about-grid{ display:grid; grid-template-columns:1.1fr .9fr; gap:56px; align-items:center; }
+.about-grid img{ border-radius:var(--radius); box-shadow:var(--shadow); filter:var(--photo-filter); }
+.feature-list{ list-style:none; margin:26px 0 0; padding:0; display:grid; grid-template-columns:1fr 1fr; gap:14px 22px; }
+.feature-list li{ display:flex; gap:10px; align-items:flex-start; font-size:.95rem; }
+.feature-list svg{ width:20px; height:20px; flex:none; color:var(--wood); margin-top:2px; }
+.stat-row{ display:flex; gap:28px; margin:28px 0; flex-wrap:wrap; }
+.stat{ background:var(--white); border-radius:var(--radius); padding:16px 22px; box-shadow:var(--shadow); text-align:center; min-width:110px; }
+.stat b{ display:block; font-family:var(--serif); font-size:1.7rem; color:var(--green-dark); }
+.stat span{ font-size:.74rem; text-transform:uppercase; letter-spacing:.08em; color:var(--text-soft); }
+@media (max-width:860px){ .about-grid{ grid-template-columns:1fr; } .feature-list{ grid-template-columns:1fr; } }
+
+/* ---------- Galerie ---------- */
+.gallery-tabs{ display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-bottom:30px; }
+.gallery-tabs button{
+  border:2px solid var(--green); background:transparent; color:var(--green-dark);
+  padding:8px 18px; border-radius:100px; cursor:pointer; font-weight:600; font-size:.85rem; transition:.2s;
+}
+.gallery-tabs button.active, .gallery-tabs button:hover{ background:var(--green); color:var(--white); }
+.gallery-grid{ display:grid; grid-template-columns:repeat(4,1fr); grid-auto-rows:170px; gap:12px; }
+.gallery-grid figure{ margin:0; overflow:hidden; border-radius:10px; cursor:zoom-in; position:relative; }
+.gallery-grid img{ width:100%; height:100%; object-fit:cover; transition:.4s ease; filter:var(--photo-filter); }
+.gallery-grid figure:hover img{ transform:scale(1.07); }
+.gallery-grid figure.big{ grid-column:span 2; grid-row:span 2; }
+@media (max-width:760px){
+  .gallery-grid{ grid-template-columns:repeat(2,1fr); grid-auto-rows:150px; }
+  .gallery-grid figure.big{ grid-column:span 2; grid-row:span 1; }
+}
+/* lightbox */
+.lightbox{ position:fixed; inset:0; background:rgba(10,18,13,.92); display:none; align-items:center; justify-content:center; z-index:2000; padding:30px; }
+.lightbox.open{ display:flex; }
+.lightbox img{ max-width:92vw; max-height:84vh; border-radius:8px; box-shadow:0 20px 60px rgba(0,0,0,.5); filter:var(--photo-filter); }
+.lightbox-close, .lightbox-nav{ position:absolute; background:rgba(255,255,255,.12); border:0; color:var(--white); width:46px; height:46px; border-radius:50%; font-size:1.4rem; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+.lightbox-close{ top:22px; right:22px; }
+.lightbox-nav.prev{ left:22px; top:50%; transform:translateY(-50%); }
+.lightbox-nav.next{ right:22px; top:50%; transform:translateY(-50%); }
+.lightbox-close:hover,.lightbox-nav:hover{ background:rgba(255,255,255,.25); }
+
+/* ---------- Ceník ---------- */
+.price-grid{ display:grid; grid-template-columns:1fr 1fr; gap:26px; max-width:860px; margin:0 auto; }
+.price-card{ background:var(--white); border-radius:var(--radius); box-shadow:var(--shadow); padding:34px 30px; text-align:center; border-top:6px solid var(--green); }
+.price-card.season{ border-top-color:var(--wood); }
+.price-card .amount{ font-family:var(--serif); font-size:2.6rem; color:var(--green-dark); margin:10px 0; }
+.price-card .amount span{ font-size:1rem; font-family:var(--sans); color:var(--text-soft); }
+.price-card ul{ text-align:left; padding-left:20px; color:var(--text-soft); font-size:.92rem; }
+.price-note{ max-width:760px; margin:30px auto 0; background:var(--cream-2); border-radius:var(--radius); padding:20px 26px; font-size:.9rem; color:var(--text-soft); }
+.price-note b{ color:var(--text); }
+@media (max-width:700px){ .price-grid{ grid-template-columns:1fr; } }
+
+/* ---------- Mapa ---------- */
+#map{ width:100%; height:560px; border-radius:var(--radius); box-shadow:var(--shadow); }
+.leaflet-tile-pane{ filter:saturate(1.18) contrast(1.06) brightness(1.02) sepia(.08) hue-rotate(-6deg); }
+.map-toolbar{ display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-bottom:20px; }
+.map-toolbar button{
+  border:2px solid var(--green); background:var(--white); color:var(--green-dark);
+  padding:9px 18px; border-radius:100px; font-weight:600; font-size:.85rem; cursor:pointer; transition:.2s;
+  display:flex; align-items:center; gap:8px;
+}
+.map-toolbar button.active{ background:var(--green); color:var(--white); }
+.map-legend{ display:flex; flex-wrap:wrap; gap:16px; justify-content:center; margin-top:16px; font-size:.82rem; color:var(--text-soft); }
+.map-legend span{ display:inline-flex; align-items:center; gap:6px; }
+.legend-dot{ width:12px; height:12px; border-radius:50%; display:inline-block; }
+
+/* custom leaflet marker */
+.kv-pin{ width:30px; height:30px; border-radius:50% 50% 50% 0; transform:rotate(-45deg); display:flex; align-items:center; justify-content:center; box-shadow:0 3px 8px rgba(0,0,0,.35); border:2px solid #fff; }
+.kv-pin span{ transform:rotate(45deg); font-size:15px; }
+.kv-pin.home{ background:var(--wood); }
+.kv-pin.nature{ background:var(--green); }
+.kv-pin.food{ background:#b5461f; }
+.kv-pin.ski{ background:#2166ac; }
+.leaflet-popup-content-wrapper{ border-radius:10px; }
+.leaflet-popup-content b{ color:var(--green-dark); }
+
+/* ---------- Výlety / tipy ---------- */
+.tips-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+.tip-card{ background:var(--white); border-radius:var(--radius); box-shadow:var(--shadow); padding:26px; display:flex; flex-direction:column; gap:10px; border-bottom:4px solid var(--green); transition:.2s; }
+.tip-card:hover{ transform:translateY(-4px); }
+.tip-card.food{ border-bottom-color:#b5461f; }
+.tip-card.ski{ border-bottom-color:#2166ac; }
+.tip-icon{ width:46px; height:46px; border-radius:50%; background:var(--cream-2); display:flex; align-items:center; justify-content:center; font-size:1.4rem; }
+.tip-photo{
+  width:calc(100% + 52px); margin:-26px -26px 4px -26px; height:130px; object-fit:cover;
+  border-radius:var(--radius) var(--radius) 0 0; filter:var(--photo-filter);
+}
+.tip-photo.tip-logo{
+  object-fit:contain; background:var(--cream-2); padding:18px; box-sizing:border-box; filter:none;
+}
+.tip-card h4{ margin-bottom:0; font-size:1.1rem; }
+.tip-dist{ font-size:.76rem; text-transform:uppercase; letter-spacing:.06em; color:var(--wood); font-weight:700; }
+.tip-card p{ font-size:.9rem; color:var(--text-soft); margin:0; flex:1; }
+.tip-card a.tip-link{ font-size:.85rem; font-weight:600; color:var(--green); text-decoration:none; }
+.tip-card a.tip-link:hover{ text-decoration:underline; }
+.tips-subhead{ margin:46px 0 18px; text-align:center; }
+@media (max-width:900px){ .tips-grid{ grid-template-columns:repeat(2,1fr); } }
+@media (max-width:600px){ .tips-grid{ grid-template-columns:1fr; } }
+
+/* ---------- Aktuality ---------- */
+.news-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+.news-card{ background:var(--white); border-radius:var(--radius); box-shadow:var(--shadow); padding:24px; text-decoration:none; display:block; border-left:4px solid var(--green); }
+.news-card:hover{ box-shadow:0 16px 34px rgba(28,58,41,.22); }
+.news-card .src{ font-size:.72rem; text-transform:uppercase; letter-spacing:.1em; color:var(--wood); font-weight:700; margin-bottom:8px; display:block; }
+.news-card h4{ margin-bottom:6px; font-size:1.02rem; }
+.news-card p{ font-size:.85rem; color:var(--text-soft); margin:0; }
+#news-live{ margin-top:36px; }
+#news-live h3{ text-align:center; margin-bottom:16px; }
+.news-live-list{ list-style:none; padding:0; margin:0; max-width:760px; margin:0 auto; display:flex; flex-direction:column; gap:10px; }
+.news-live-list li{ background:var(--white); border-radius:10px; padding:14px 18px; box-shadow:var(--shadow); font-size:.9rem; display:flex; gap:12px; }
+.news-live-list .date{ color:var(--wood); font-weight:700; white-space:nowrap; }
+.news-status{ text-align:center; font-size:.82rem; color:var(--text-soft); margin-top:10px; }
+@media (max-width:900px){ .news-grid{ grid-template-columns:1fr 1fr; } }
+@media (max-width:600px){ .news-grid{ grid-template-columns:1fr; } }
+
+/* ---------- Kalendář obsazenosti ---------- */
+.cal-card{ background:var(--white); border-radius:var(--radius); box-shadow:var(--shadow); padding:22px 24px 20px; max-width:480px; margin:0 auto; }
+.cal-header{ display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
+.cal-header h4{ margin:0; font-size:1.05rem; text-transform:capitalize; }
+.cal-nav-btn{
+  width:34px; height:34px; border-radius:50%; border:2px solid var(--green); background:var(--white);
+  color:var(--green-dark); font-size:1rem; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:.15s;
+}
+.cal-nav-btn:hover:not(:disabled){ background:var(--green); color:var(--white); }
+.cal-nav-btn:disabled{ opacity:.3; cursor:not-allowed; }
+.cal-grid{ display:grid; grid-template-columns:repeat(7,1fr); gap:4px; }
+.cal-weekday{ text-align:center; font-size:.68rem; font-weight:700; color:var(--text-soft); padding-bottom:4px; }
+.cal-weekday.weekend{ color:var(--wood-dark); }
+.cal-day{
+  position:relative; text-align:center; padding:8px 0; border-radius:7px; font-size:.82rem; font-weight:600;
+  background:#e3ddc9; color:#a9a48f; /* mimo měsíc / prázdné */
+}
+.cal-day.in-month.free{ background:#c3e6c9; color:#245c33; }
+.cal-day.in-month.occupied{ background:#f3b36b; color:#7a4408; }
+.cal-day.in-month.past{ background:#eae5d6; color:#b3ae9c; }
+.cal-day.weekend.free{ background:#a9d9b2; box-shadow:inset 0 -3px 0 var(--wood); }
+.cal-day.weekend.occupied{ background:#eda048; box-shadow:inset 0 -3px 0 var(--wood-dark); }
+.cal-day.weekend.past{ box-shadow:inset 0 -3px 0 #cfc8b0; }
+.cal-day.today{ box-shadow:inset 0 0 0 2px var(--green-dark); }
+.cal-day.weekend.today{ box-shadow:inset 0 0 0 2px var(--green-dark), inset 0 -3px 0 var(--wood); }
+.cal-day .dot{
+  position:absolute; top:3px; right:3px; width:6px; height:6px; border-radius:50%; background:#b5461f;
+}
+.cal-legend{ display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-top:16px; font-size:.76rem; color:var(--text-soft); }
+.cal-legend span{ display:inline-flex; align-items:center; gap:5px; }
+.cal-legend i{ width:11px; height:11px; border-radius:3px; display:inline-block; }
+.cal-apartment-picker{ display:flex; justify-content:center; gap:10px; margin-bottom:18px; flex-wrap:wrap; }
+.cal-apartment-picker select{ border-radius:100px; border:2px solid var(--green); padding:8px 16px; font-weight:600; color:var(--green-dark); background:var(--white); }
+
+/* ---------- Rezervace ---------- */
+.reserve-wrap{ display:grid; grid-template-columns:1fr 1fr; gap:50px; align-items:flex-start; }
+.reserve-info{ color:var(--cream-2); }
+section#rezervace{ background:var(--green-dark); color:var(--white); }
+section#rezervace h2.section-title, section#rezervace p.section-lead{ color:var(--white); }
+section#rezervace .reserve-info h3{ color:var(--white); }
+.reserve-info ul{ padding-left:20px; }
+.contact-box{ background:rgba(255,255,255,.08); border-radius:var(--radius); padding:22px 26px; margin-top:26px; }
+.contact-box a{ display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--white); font-weight:600; margin-bottom:12px; }
+.contact-box a:last-child{ margin-bottom:0; }
+form#reserve-form{ background:var(--white); border-radius:var(--radius); padding:32px; box-shadow:var(--shadow); color:var(--text); }
+.form-row{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px; }
+.form-field{ margin-bottom:16px; display:flex; flex-direction:column; gap:6px; }
+.form-field label{ font-size:.82rem; font-weight:600; color:var(--text-soft); }
+.form-field input, .form-field select, .form-field textarea{
+  padding:12px 14px; border-radius:8px; border:1.5px solid #ddd4c0; font-family:var(--sans); font-size:.95rem; background:var(--cream);
+}
+.form-field input:focus, .form-field textarea:focus, .form-field select:focus{ outline:2px solid var(--green); border-color:var(--green); }
+.form-note{ font-size:.78rem; color:var(--text-soft); margin-top:14px; }
+#form-feedback{ margin-top:14px; font-size:.9rem; font-weight:600; display:none; }
+#form-feedback.ok{ color:var(--green); display:block; }
+#form-feedback.err{ color:#a23; display:block; }
+@media (max-width:860px){ .reserve-wrap{ grid-template-columns:1fr; } .form-row{ grid-template-columns:1fr; } }
+
+/* ---------- Footer ---------- */
+footer.site-footer{ background:#122117; color:var(--cream-2); padding:50px 0 24px; }
+.footer-grid{ display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:36px; margin-bottom:36px; }
+.footer-grid h4{ color:var(--white); font-size:1rem; margin-bottom:14px; }
+.footer-grid ul{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px; font-size:.88rem; }
+.footer-grid a{ text-decoration:none; color:var(--cream-2); }
+.footer-grid a:hover{ color:var(--white); }
+.footer-bottom{ border-top:1px solid rgba(255,255,255,.12); padding-top:20px; font-size:.78rem; color:#9aa798; text-align:center; }
+@media (max-width:760px){ .footer-grid{ grid-template-columns:1fr; } }
+
+/* utility */
+.reveal{ opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease; }
+.reveal.in{ opacity:1; transform:none; }

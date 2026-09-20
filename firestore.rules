@@ -1,0 +1,38 @@
+rules_version = '2';
+
+// Kvilda 202 – bezpečnostní pravidla Firestore
+// Vložte do Firebase Console → Firestore Database → Pravidla (Rules) → Publikovat.
+//
+// - Číst obsazené termíny (blocked_ranges) smí kdokoliv (potřebuje to veřejný kalendář).
+// - Zapisovat (přidat/smazat termín) smí jen přihlášení uživatelé, jejichž e-mail
+//   je v seznamu níže. Seznam MUSÍ odpovídat proměnné KVILDA_ADMIN_EMAILS
+//   v souboru js/firebase-config.js.
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /blocked_ranges/{rangeId} {
+      allow read: if true;
+      allow write: if request.auth != null &&
+        request.auth.token.email in [
+          'kvilda202@gmail.com',
+          'pavla.hraba@gmail.com'
+        ];
+    }
+
+    // Seznam apartmánů (spravováno správcem přes admin.html).
+    match /apartments/{apartmentId} {
+      allow read: if true;
+      allow write: if request.auth != null &&
+        request.auth.token.email in [
+          'kvilda202@gmail.com',
+          'pavla.hraba@gmail.com'
+        ];
+    }
+
+    // Vše ostatní je uzavřené.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
