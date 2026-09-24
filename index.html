@@ -57,11 +57,19 @@
           <a href="#galerie" class="btn btn-outline">Prohlédnout fotky</a>
         </div>
       </div>
-      <div class="hero-weather" id="hero-weather">
-        <span class="place">Kvilda, Šumava</span>
-        <div class="icon" id="weather-icon">⛅</div>
-        <div class="temp" id="weather-temp">–°C</div>
-        <div class="desc" id="weather-desc">Načítám počasí…</div>
+      <div class="hero-widgets">
+        <div class="hero-weather" id="hero-weather">
+          <span class="place">Kvilda, Šumava</span>
+          <div class="icon" id="weather-icon">⛅</div>
+          <div class="temp" id="weather-temp">–°C</div>
+          <div class="desc" id="weather-desc">Načítám počasí…</div>
+        </div>
+        <div class="hero-weather hero-radar">
+          <span class="place">Meteoradar</span>
+          <div class="radar-map" id="radar-map" aria-label="Aktuální srážkový radar okolí Kvildy"></div>
+          <div class="desc"><span id="radar-time">Načítám radar…</span> · <a href="https://www.rainviewer.com/map.html?loc=49.016,13.582,7&amp;layer=radar" target="_blank" rel="noopener">větší mapa →</a></div>
+          <div class="radar-attr">Weather data by <a href="https://www.rainviewer.com" target="_blank" rel="noopener">RainViewer</a></div>
+        </div>
       </div>
     </div>
     <div class="hero-facts">
@@ -355,6 +363,21 @@
         <h4>Sněhové zpravodajství</h4>
         <p>Provoz vleků, upravené sjezdovky a stopy pro běžecké lyžování.</p>
       </a>
+      <a class="news-card" href="https://www.facebook.com/skikvilda" target="_blank" rel="noopener">
+        <span class="src">SKI Kvilda</span>
+        <h4>Sjezdovka Kvilda – provoz a ceník skipasů</h4>
+        <p>Rodinný areál se 3 vleky a zasněžováním kousek od apartmánu. Aktuální provoz, ceny skipasů a večerní lyžování. Tel. 734 647 979.</p>
+      </a>
+      <a class="news-card" href="https://www.sportsumava.cz/informace/kontakt-zima/kvilda" target="_blank" rel="noopener">
+        <span class="src">Sport Šumava &amp; Ski Zadov</span>
+        <h4>Lyžařská škola a půjčovna lyží Kvilda</h4>
+        <p>Výuka lyžování a snowboardu pro děti i dospělé a půjčovna vybavení u centrálního parkoviště (vedle Apartmánů Florian). Tel. 734 433 388.</p>
+      </a>
+      <a class="news-card" href="https://www.sportsumava.cz/informace/kontakt-zima/kvilda" target="_blank" rel="noopener">
+        <span class="src">Sport Šumava</span>
+        <h4>Půjčovna běžek Kvilda</h4>
+        <p>Běžkařské vybavení v budově obecního úřadu (Kvilda 17), denně 9–12 a 13–16 h. Tel. 734 282 450.</p>
+      </a>
       <a class="news-card" href="https://www.obeckvilda.cz/kvilda/okoli.asp" target="_blank" rel="noopener">
         <span class="src">Obec Kvilda</span>
         <h4>Tipy na výlety od obce</h4>
@@ -488,6 +511,7 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script><script src="js/firebase-config.js"></script>
 <script src="js/main.js"></script>
 <script src="js/weather.js"></script>
+<script src="js/radar.js"></script>
 <script src="js/map.js"></script>
 <script type="module" src="js/booking.js"></script>
 </body>
