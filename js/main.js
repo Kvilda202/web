@@ -6,6 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const mainNav = document.querySelector('.main-nav');
   if (navToggle && mainNav) {
     const setNav = open => {
+      const hdr = document.querySelector('header.site-header');
+      if (hdr) document.documentElement.style.setProperty('--header-h', hdr.offsetHeight + 'px');
       mainNav.classList.toggle('open', open);
       document.body.classList.toggle('nav-open', open);
       navToggle.textContent = open ? '✕' : '☰';
