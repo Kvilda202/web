@@ -99,12 +99,22 @@ nav.main-nav a:hover{ color:var(--white); }
 .nav-toggle{ display:none; background:none; border:0; color:var(--white); font-size:1.6rem; cursor:pointer; }
 
 @media (max-width:900px){
+  /* Mobilní menu – překryje celou stránku pod hlavičkou */
   nav.main-nav{
-    position:fixed; inset:64px 0 0 0; background:var(--green-dark); flex-direction:column;
-    padding:30px 24px; gap:22px; transform:translateX(100%); transition:.3s ease; overflow-y:auto;
+    position:absolute; top:100%; left:0; right:0;
+    height:calc(100vh - 84px); height:calc(100dvh - 84px);
+    background:var(--green-dark); flex-direction:column; align-items:stretch; gap:0;
+    padding:12px 24px 32px; overflow-y:auto; overscroll-behavior:contain;
+    opacity:0; visibility:hidden; transform:translateY(-10px);
+    transition:opacity .25s ease, transform .25s ease, visibility 0s linear .25s;
+    box-shadow:0 12px 24px rgba(0,0,0,.25);
   }
-  nav.main-nav.open{ transform:translateX(0); }
-  .nav-toggle{ display:block; }
+  nav.main-nav.open{ opacity:1; visibility:visible; transform:none; transition:opacity .25s ease, transform .25s ease; }
+  nav.main-nav a{ display:block; font-size:1.15rem; padding:16px 4px; border-bottom:1px solid rgba(255,255,255,.12); }
+  nav.main-nav a.nav-phone{ display:block; font-size:1.15rem!important; }
+  nav.main-nav a.nav-admin{ margin:24px 0 0; text-align:center; justify-content:center; border-bottom:2px solid rgba(255,255,255,.55); padding:12px 18px; }
+  .nav-toggle{ display:block; width:44px; height:44px; font-size:1.7rem; line-height:1; }
+  body.nav-open{ overflow:hidden; }
 }
 
 /* ---------- Hero ---------- */
