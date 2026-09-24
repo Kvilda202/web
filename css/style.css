@@ -130,9 +130,13 @@ nav.main-nav a:hover{ color:var(--white); }
   text-align:center; color:var(--white); margin-top:6px;
 }
 .hero-weather .place{ display:block; font-size:.72rem; text-transform:uppercase; letter-spacing:.09em; color:var(--cream-2); margin-bottom:10px; }
-.hero-weather .icon{ font-size:2.2rem; line-height:1; margin-bottom:6px; }
+.hero-weather .icon{ width:84px; height:84px; margin:0 auto 8px; filter:drop-shadow(0 3px 6px rgba(0,0,0,.25)); }
+.hero-weather .icon svg{ display:block; }
 .hero-weather .temp{ font-family:var(--serif); font-size:2.4rem; line-height:1; color:var(--white); }
 .hero-weather .desc{ font-size:.82rem; color:var(--cream-2); margin-top:8px; }
+#hero-weather{ display:flex; flex-direction:column; align-items:center; }
+#hero-weather .place{ margin-bottom:auto; }
+#hero-weather .desc{ margin-bottom:auto; }
 .hero-widgets{ display:flex; gap:16px; align-items:stretch; flex-wrap:wrap; }
 .hero-radar{ flex:0 0 260px; padding:18px 18px 14px; display:flex; flex-direction:column; }
 .radar-map{ height:150px; border-radius:10px; overflow:hidden; background:#2b3a31; flex:1 0 150px; }
@@ -215,6 +219,9 @@ nav.main-nav a:hover{ color:var(--white); }
 .kv-pin.nature{ background:var(--green); }
 .kv-pin.food{ background:#b5461f; }
 .kv-pin.ski{ background:#2166ac; }
+.kv-pin.cafe{ background:#8a5a3b; }
+.kv-pin.shop{ background:#c88a12; }
+.kv-pin.bus{ background:#6a3fa0; }
 .kv-pin.kv-pin-logo{ background:#fff; width:42px; height:42px; }
 .kv-pin.kv-pin-logo img{ width:34px; height:34px; border-radius:50%; object-fit:cover; transform:rotate(45deg); }
 .leaflet-popup-content-wrapper{ border-radius:10px; }
