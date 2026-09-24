@@ -222,6 +222,7 @@ nav.main-nav a:hover{ color:var(--white); }
 .kv-pin.cafe{ background:#8a5a3b; }
 .kv-pin.shop{ background:#c88a12; }
 .kv-pin.bus{ background:#6a3fa0; }
+.kv-pin.bike{ background:#2f7d32; }
 .kv-pin.kv-pin-logo{ background:#fff; width:42px; height:42px; }
 .kv-pin.kv-pin-logo img{ width:34px; height:34px; border-radius:50%; object-fit:cover; transform:rotate(45deg); }
 .leaflet-popup-content-wrapper{ border-radius:10px; }
@@ -247,6 +248,8 @@ nav.main-nav a:hover{ color:var(--white); }
 .tip-dist{ font-size:.76rem; text-transform:uppercase; letter-spacing:.06em; color:var(--wood); font-weight:700; }
 .tip-card a.tip-link{ font-size:.85rem; font-weight:600; color:var(--green); text-decoration:none; }
 .tip-card a.tip-link:hover{ text-decoration:underline; }
+.tip-credit{ font-size:.68rem; color:var(--text-soft); opacity:.8; }
+.tip-credit a{ color:inherit; }
 .tips-subhead{ margin:46px 0 18px; text-align:center; }
 @media (max-width:900px){ .tips-grid{ grid-template-columns:repeat(2,1fr); } }
 @media (max-width:600px){ .tips-grid{ grid-template-columns:1fr; } }
