@@ -222,7 +222,7 @@ nav.main-nav a:hover{ color:var(--white); }
 .tip-icon-row{ display:flex; gap:10px; }
 .tip-icon svg{ width:26px; height:26px; color:var(--wood); }
 .tip-photo{
-  width:calc(100% + 52px); margin:-26px -26px 4px -26px; height:130px; object-fit:cover;
+  width:calc(100% + 52px); max-width:none; margin:-26px -26px 4px -26px; height:130px; object-fit:cover;
   border-radius:var(--radius) var(--radius) 0 0; filter:var(--photo-filter);
 }
 .tip-photo.tip-logo.tip-logo-dark{ background:var(--green-dark); } .tip-photo.tip-logo{
