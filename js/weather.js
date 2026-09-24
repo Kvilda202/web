@@ -62,8 +62,19 @@
     99: ['Bouřka s kroupami', 'thunder'],
   };
 
+  // Ikona stejně široká jako text teploty
+  function fitIcon() {
+    if (!elIcon) return;
+    const r = document.createRange(); r.selectNodeContents(elTemp);
+    const w = Math.max(64, Math.round(r.getBoundingClientRect().width));
+    elIcon.style.width = w + 'px';
+    elIcon.style.height = Math.round(w * 60 / 51) + 'px';
+  }
+  window.addEventListener('resize', fitIcon);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitIcon);
+
   const svg = (key, isDay) =>
-    `<svg viewBox="0 0 64 68" width="100%" height="100%" aria-hidden="true">${(ICONS[key] || ICONS.partly)(isDay)}</svg>`;
+    `<svg viewBox="7 5 51 60" width="100%" height="100%" aria-hidden="true">${(ICONS[key] || ICONS.partly)(isDay)}</svg>`;
 
   const elIcon = document.getElementById('weather-icon');
   const elTemp = document.getElementById('weather-temp');
@@ -81,7 +92,7 @@
       const [desc, key] = WMO[cur.weather_code] || ['Počasí na Kvildě', 'partly'];
       elTemp.textContent = Math.round(cur.temperature_2m) + '°C';
       elDesc.textContent = desc;
-      if (elIcon) elIcon.innerHTML = svg(key, cur.is_day !== 0);
+      if (elIcon) { elIcon.innerHTML = svg(key, cur.is_day !== 0); fitIcon(); }
     })
     .catch(() => {
       elDesc.textContent = 'Počasí se nepodařilo načíst';
