@@ -20,7 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
     { id:'horska-kvilda', type:'nature', name:'Horská Kvilda', desc:'Sousední horská obec, oblíbený cíl běžkařů i turistů.', coords:[49.0576,13.5580], link:'https://cs.wikipedia.org/wiki/Horsk%C3%A1_Kvilda' },
     { id:'vybeh-rysu', type:'nature', name:'Jelení a rysí výběh', desc:'Návštěvnické centrum NP Šumava, bezbariérová stezka s vyhlídkovými věžemi, vstup zdarma.', coords:[49.0312,13.5809], link:'https://www.npsumava.cz/navstivte-sumavu/navstevnicka-centra/navstevnicke-centrum-kvilda/' },
     { id:'zadov-ski', type:'ski', name:'Skiareál Zadov–Churáňov', desc:'Největší lyžařské středisko na Šumavě, sjezdovky i běžecké trasy.', coords:[49.0663,13.6316], link:'https://www.lazadov.cz/' },
-    { id:'zadov-rozhledna', type:'ski', name:'Rozhledna Zadov', desc:'Netradiční vyhlídka na bývalém skokanském můstku, 32 m nad zemí.', coords:[49.0615,13.6298], link:'https://www.lazadov.cz/la/leto-rozhledna.asp' },
+    { id:'zadov-rozhledna', type:'ski', name:'Rozhledna Zadov', desc:'Rozhledna přestavěná z bývalého skokanského můstku (1978), vyhlídka 32 m nad zemí.', coords:[49.06137,13.62967], link:'https://www.lazadov.cz/la/leto-rozhledna.asp' },
+    { id:'bike-zadov', type:'bike', name:'Bike Area Zadov – downhill traily', desc:'Start sjezdových trailů u horní stanice lanovky Kobyla (kola vyveze lanovka). Půjčovna kol dole v areálu.', coords:[49.06033,13.62845], link:'https://www.lazadov.cz/la/leto-enduro.asp' },
     { id:'pivovar', type:'food', name:'Pekárna a pivovar Kvilda', desc:'Rodinný pivovar, pekárna a restaurace přímo na Kvildě.', coords:[49.0207,13.5797], link:'https://www.pekarnakvilda.cz' },
     { id:'nadivoko', type:'food', name:'Kvilda Nadivoko', desc:'Restaurace s poctivou kuchyní z lokálních surovin.', coords:[49.0149,13.5789], link:'https://www.kvilda-nadivoko.cz' },
     { id:'sumava-inn', type:'food', name:'Hotel a restaurace Šumava Inn', desc:'Restaurace se staročeskou šumavskou i mezinárodní kuchyní.', coords:[49.0180,13.5797], link:'https://www.sumavainn.cz/cz/' },
@@ -46,6 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
     cafe:  { emoji:'☕', cls:'cafe' },
     shop:  { emoji:'🛒', cls:'shop' },
     bus:   { emoji:'🚌', cls:'bus' },
+    bike:  { emoji:'🚵', cls:'bike' },
   };
 
   function makeIcon(type) {
