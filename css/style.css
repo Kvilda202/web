@@ -133,7 +133,15 @@ nav.main-nav a:hover{ color:var(--white); }
 .hero-weather .icon{ font-size:2.2rem; line-height:1; margin-bottom:6px; }
 .hero-weather .temp{ font-family:var(--serif); font-size:2.4rem; line-height:1; color:var(--white); }
 .hero-weather .desc{ font-size:.82rem; color:var(--cream-2); margin-top:8px; }
-@media (max-width:900px){ .hero-top{ flex-direction:column; } .hero-weather{ align-self:flex-start; } }
+.hero-widgets{ display:flex; gap:16px; align-items:stretch; flex-wrap:wrap; }
+.hero-radar{ flex:0 0 260px; padding:18px 18px 14px; display:flex; flex-direction:column; }
+.radar-map{ height:150px; border-radius:10px; overflow:hidden; background:#2b3a31; flex:1 0 150px; }
+.radar-map .leaflet-control-container{ display:none; }
+.hero-radar .desc a, .radar-attr a{ color:var(--white); }
+.radar-attr{ font-size:.66rem; color:var(--cream-2); opacity:.75; margin-top:4px; }
+.radar-home{ width:10px; height:10px; border-radius:50%; background:#e0472b; border:2px solid #fff; box-shadow:0 0 0 2px rgba(0,0,0,.35); }
+@media (max-width:900px){ .hero-top{ flex-direction:column; } .hero-widgets{ align-self:flex-start; } }
+@media (max-width:600px){ .hero-widgets{ width:100%; } .hero-widgets > *{ flex:1 1 100%; } }
 @media (max-width:600px){ .hero-logo{ width:150px; height:150px; } }
 .scroll-cue{ position:absolute; bottom:26px; left:50%; transform:translateX(-50%); color:var(--cream-2); font-size:.8rem; letter-spacing:.15em; text-transform:uppercase; opacity:.8; }
 
