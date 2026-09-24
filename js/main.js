@@ -5,14 +5,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const navToggle = document.querySelector('.nav-toggle');
   const mainNav = document.querySelector('.main-nav');
   if (navToggle && mainNav) {
-    navToggle.addEventListener('click', () => {
-      mainNav.classList.toggle('open');
-      navToggle.textContent = mainNav.classList.contains('open') ? '✕' : '☰';
-    });
-    mainNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-      mainNav.classList.remove('open');
-      navToggle.textContent = '☰';
-    }));
+    const setNav = open => {
+      mainNav.classList.toggle('open', open);
+      document.body.classList.toggle('nav-open', open);
+      navToggle.textContent = open ? '✕' : '☰';
+      navToggle.setAttribute('aria-expanded', open);
+    };
+    navToggle.addEventListener('click', () => setNav(!mainNav.classList.contains('open')));
+    mainNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setNav(false)));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') setNav(false); });
+    window.addEventListener('resize', () => { if (window.innerWidth > 900) setNav(false); });
   }
 
   /* ---------- Reveal on scroll ---------- */
