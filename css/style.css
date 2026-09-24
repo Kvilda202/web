@@ -79,7 +79,7 @@ header.site-header{
 }
 .header-inner{ display:flex; align-items:center; justify-content:space-between; padding:10px 24px; max-width:var(--maxw); margin:0 auto; }
 .brand{ display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--white); }
-.brand img{ width:64px; height:64px; border-radius:50%; background:var(--cream); object-fit:contain; }
+.brand img{ width:64px; height:64px; border-radius:50%; background:#fff; object-fit:contain; }
 .brand-text{ font-family:var(--serif); font-size:1.25rem; line-height:1.1; }
 .brand-text small{ display:block; font-family:var(--sans); font-size:.62rem; letter-spacing:.15em; text-transform:uppercase; color:var(--cream-2); font-weight:600; }
 nav.main-nav{ display:flex; gap:26px; align-items:center; }
@@ -115,7 +115,7 @@ nav.main-nav a:hover{ color:var(--white); }
 .hero-inner{ max-width:var(--maxw); margin:0 auto; padding:140px 24px 80px; width:100%; }
 .hero-top{ display:flex; justify-content:space-between; align-items:flex-start; gap:40px; flex-wrap:wrap; }
 .hero-text{ flex:1 1 480px; }
-.hero-logo{ width:220px; height:220px; border-radius:50%; background:var(--cream); padding:10px; margin-bottom:22px; box-shadow:var(--shadow); object-fit:contain; }
+.hero-logo{ width:220px; height:220px; border-radius:50%; background:#fff; padding:10px; margin-bottom:22px; box-shadow:var(--shadow); object-fit:contain; }
 .hero h1{ color:var(--white); font-size:clamp(2.2rem,5vw,3.6rem); max-width:780px; margin-bottom:.25em; }
 .hero p.lead{ font-size:1.15rem; max-width:560px; color:var(--cream-2); margin-bottom:2em; }
 .hero-cta{ display:flex; flex-wrap:wrap; gap:16px; }
