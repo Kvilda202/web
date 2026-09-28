@@ -209,6 +209,164 @@ exports.tuyaSetDevice = onCall({ secrets: TUYA_SECRETS, region: 'europe-west1' }
 });
 
 // ---------------------------------------------------------------------
+// VŠECHNA zařízení v Tuya projektu (pro admin panel) – obecné ovládání
+// ---------------------------------------------------------------------
+// Kategorie, u kterých admin panel i server vyžadují potvrzení
+// (zámky, ventily vody/plynu, alarmy) – aby nešlo omylem odemknout / zavřít vodu.
+const SENSITIVE_CATEGORIES = ['ms', 'jtmspro', 'jtmsbh', 'mk', 'bxx', 'gyms', 'sfkzq', 'fs_valve', 'mal'];
+const SENSITIVE_NAME_RE = /(zámek|zamek|lock|ventil|valve|alarm)/i;
+
+function parseValues(v) {
+  if (!v) return {};
+  if (typeof v === 'object') return v;
+  try { return JSON.parse(v); } catch (e) { return {}; }
+}
+
+// Vrátí seznam zařízení v projektu (id, name, category, online…)
+async function listProjectDevices(client) {
+  const out = [];
+  // 1) Tuya IoT projekt – "Query devices in project"
+  try {
+    let lastId = '';
+    for (let page = 0; page < 20; page++) {
+      // eslint-disable-next-line no-await-in-loop
+      const res = await client.request({
+        path: '/v2.0/cloud/thing/device',
+        method: 'GET',
+        query: lastId ? { page_size: 20, last_id: lastId } : { page_size: 20 },
+      });
+      if (!res.success) break;
+      const list = Array.isArray(res.result) ? res.result : (res.result?.list || []);
+      out.push(...list);
+      if (list.length < 20) break;
+      lastId = list[list.length - 1].id;
+    }
+  } catch (e) { logger.warn('v2.0 device list failed', e.message); }
+
+  // 2) Záloha – zařízení z propojeného účtu aplikace Smart Life / Tuya Smart
+  if (!out.length) {
+    let lastRowKey = '';
+    for (let page = 0; page < 20; page++) {
+      // eslint-disable-next-line no-await-in-loop
+      const res = await client.request({
+        path: '/v1.0/iot-01/associated-users/devices',
+        method: 'GET',
+        query: lastRowKey ? { size: 100, last_row_key: lastRowKey } : { size: 100 },
+      });
+      if (!res.success) throw new Error(res.msg || 'Seznam zařízení z Tuya se nepodařilo načíst.');
+      out.push(...(res.result?.devices || []));
+      if (!res.result?.has_more) break;
+      lastRowKey = res.result.last_row_key;
+    }
+  }
+
+  // sjednocení názvů polí mezi verzemi API + odstranění duplicit
+  const seen = new Set();
+  return out.map(d => ({
+    id: d.id,
+    name: d.customName || d.name || d.id,
+    category: d.category || '',
+    productName: d.productName || d.product_name || '',
+    online: !!(d.isOnline ?? d.online ?? d.is_online),
+  })).filter(d => d.id && !seen.has(d.id) && seen.add(d.id));
+}
+
+async function getDeviceDetail(client, dev) {
+  const [specRes, statusRes] = await Promise.all([
+    client.request({ path: `/v1.0/devices/${dev.id}/specifications`, method: 'GET' }).catch(e => ({ success: false, msg: e.message })),
+    client.request({ path: `/v1.0/devices/${dev.id}/status`, method: 'GET' }).catch(e => ({ success: false, msg: e.message })),
+  ]);
+  const functions = specRes.success ? (specRes.result.functions || []) : [];
+  const statusSpec = specRes.success ? (specRes.result.status || []) : [];
+  const status = statusRes.success ? (statusRes.result || []) : [];
+  const heating = HEATING_DEVICES.some(h => h.id === dev.id);
+  return {
+    ...dev,
+    heating,
+    sensitive: SENSITIVE_CATEGORIES.includes(dev.category) || SENSITIVE_NAME_RE.test(dev.name),
+    functions: functions.map(f => ({ code: f.code, type: f.type, values: parseValues(f.values) })),
+    statusSpec: statusSpec.map(f => ({ code: f.code, type: f.type, values: parseValues(f.values) })),
+    status: status.map(x => ({ code: x.code, value: x.value })),
+    error: specRes.success ? undefined : specRes.msg,
+  };
+}
+
+exports.tuyaListAllDevices = onCall({ secrets: TUYA_SECRETS, region: 'europe-west1', timeoutSeconds: 120 }, async (req) => {
+  assertAdmin(req.auth);
+  const client = getTuya();
+  let list;
+  try {
+    list = await listProjectDevices(client);
+  } catch (e) {
+    throw new HttpsError('unavailable', e.message);
+  }
+  // doplnit i scénářová zařízení, kdyby je seznam z projektu nevrátil
+  HEATING_DEVICES.forEach(h => {
+    if (!list.some(d => d.id === h.id)) list.push({ id: h.id, name: h.name, category: '', productName: '', online: false });
+  });
+  const devices = await Promise.all(list.map(d => getDeviceDetail(client, d)));
+  devices.sort((a, b) => (b.heating - a.heating) || a.name.localeCompare(b.name, 'cs'));
+  return { devices };
+});
+
+// Obecný příkaz pro jedno zařízení: { deviceId, code, value, confirm }
+// value = hodnota v "lidských" jednotkách (např. 21.5 °C) – škálování dělá server.
+exports.tuyaSendCommand = onCall({ secrets: TUYA_SECRETS, region: 'europe-west1' }, async (req) => {
+  assertAdmin(req.auth);
+  const { deviceId, code, value, confirm } = req.data || {};
+  if (typeof deviceId !== 'string' || typeof code !== 'string') {
+    throw new HttpsError('invalid-argument', 'Chybí zařízení nebo příkaz.');
+  }
+  const client = getTuya();
+  const list = await listProjectDevices(client).catch(() => []);
+  let dev = list.find(d => d.id === deviceId);
+  if (!dev) {
+    const h = HEATING_DEVICES.find(d => d.id === deviceId);
+    if (h) dev = { id: h.id, name: h.name, category: '' };
+  }
+  if (!dev) throw new HttpsError('invalid-argument', 'Zařízení nepatří do projektu.');
+  const sensitive = SENSITIVE_CATEGORIES.includes(dev.category) || SENSITIVE_NAME_RE.test(dev.name);
+  if (sensitive && confirm !== true) {
+    throw new HttpsError('failed-precondition', 'Toto zařízení vyžaduje potvrzení.');
+  }
+
+  let functions;
+  try { functions = await getDeviceFunctions(client, deviceId); } catch (e) {
+    throw new HttpsError('unavailable', e.message);
+  }
+  const fn = functions.find(f => f.code === code);
+  if (!fn) throw new HttpsError('invalid-argument', 'Zařízení tento příkaz nepodporuje.');
+  const vals = parseValues(fn.values);
+
+  let raw;
+  if (fn.type === 'Boolean') {
+    if (typeof value !== 'boolean') throw new HttpsError('invalid-argument', 'Očekávána hodnota ano/ne.');
+    raw = value;
+  } else if (fn.type === 'Integer') {
+    const num = Number(value);
+    if (!Number.isFinite(num)) throw new HttpsError('invalid-argument', 'Očekáváno číslo.');
+    const scale = vals.scale || 0;
+    raw = Math.round(num * 10 ** scale);
+    if (typeof vals.min === 'number' && raw < vals.min) raw = vals.min;
+    if (typeof vals.max === 'number' && raw > vals.max) raw = vals.max;
+  } else if (fn.type === 'Enum') {
+    if (!Array.isArray(vals.range) || !vals.range.includes(value)) throw new HttpsError('invalid-argument', 'Neplatná volba.');
+    raw = value;
+  } else {
+    throw new HttpsError('invalid-argument', `Typ ${fn.type} nelze z panelu ovládat.`);
+  }
+
+  const res = await client.request({
+    path: `/v1.0/devices/${deviceId}/commands`,
+    method: 'POST',
+    body: { commands: [{ code, value: raw }] },
+  });
+  logger.info('tuyaSendCommand', { by: req.auth.token.email, deviceId, name: dev.name, code, raw, success: res.success });
+  if (!res.success) throw new HttpsError('aborted', res.msg || 'Tuya příkaz odmítla.');
+  return { success: true };
+});
+
+// ---------------------------------------------------------------------
 // Callable: ruční spuštění scénáře z admin panelu
 // ---------------------------------------------------------------------
 exports.tuyaRunScenario = onCall({ secrets: TUYA_SECRETS, region: 'europe-west1' }, async (req) => {
