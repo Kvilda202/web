@@ -50,8 +50,8 @@ if (!isConfigured) {
   const functions = getFunctions(app, 'europe-west1');
   const provider = new GoogleAuthProvider();
 
-  const fnListDevices = httpsCallable(functions, 'tuyaListDevices');
-  const fnSetDevice = httpsCallable(functions, 'tuyaSetDevice');
+  const fnListDevices = httpsCallable(functions, 'tuyaListAllDevices');
+  const fnSendCommand = httpsCallable(functions, 'tuyaSendCommand');
   const fnRunScenario = httpsCallable(functions, 'tuyaRunScenario');
   const fnSendEmail = httpsCallable(functions, 'sendReservationEmail');
 
@@ -219,7 +219,7 @@ if (!isConfigured) {
   let tuyaDevices = [];
 
   async function loadTuyaDevices() {
-    tuyaStatusEl.textContent = 'Načítám zařízení…';
+    tuyaStatusEl.textContent = 'Načítám všechna zařízení z Tuya…';
     try {
       const res = await fnListDevices();
       tuyaDevices = res.data?.devices || [];
@@ -227,6 +227,60 @@ if (!isConfigured) {
       renderTuyaDevices();
     } catch (err) {
       tuyaStatusEl.textContent = 'Nepodařilo se načíst zařízení: ' + err.message;
+    }
+  }
+
+  // Srozumitelné názvy běžných Tuya DP kódů
+  const DP_LABELS = {
+    switch: 'Zapnuto', switch_1: 'Vypínač 1', switch_2: 'Vypínač 2', switch_3: 'Vypínač 3', switch_4: 'Vypínač 4',
+    switch_led: 'Světlo', switch_usb1: 'USB', temp_set: 'Nastavená teplota', temp_current: 'Aktuální teplota',
+    upper_temp: 'Max. teplota', lower_temp: 'Min. teplota', temp_correction: 'Korekce teploty',
+    mode: 'Režim', work_mode: 'Režim', child_lock: 'Dětský zámek', window_check: 'Detekce okna',
+    frost: 'Ochrana proti mrazu', eco: 'Úsporný režim', battery_percentage: 'Baterie', battery_state: 'Baterie',
+    humidity_value: 'Vlhkost', va_humidity: 'Vlhkost', va_temperature: 'Teplota',
+    cur_power: 'Příkon', cur_current: 'Proud', cur_voltage: 'Napětí', add_ele: 'Spotřeba',
+    countdown_1: 'Odpočet', relay_status: 'Stav po výpadku proudu', light_mode: 'Podsvícení',
+    bright_value: 'Jas', bright_value_v2: 'Jas', temp_value: 'Teplota světla', temp_value_v2: 'Teplota světla',
+    colour_data: 'Barva', control: 'Ovládání', percent_control: 'Poloha', valve_state: 'Ventil',
+    doorcontact_state: 'Dveře otevřené', pir: 'Pohyb', unlock_fingerprint: 'Odemčeno otiskem',
+    unlock_password: 'Odemčeno kódem', unlock_app: 'Odemčeno aplikací', alarm_lock: 'Alarm zámku',
+    residual_electricity: 'Baterie', closed_opened: 'Stav dveří', fault: 'Porucha', factory_reset: null,
+  };
+  const ENUM_LABELS = {
+    auto: 'automaticky', manual: 'ručně', holiday: 'dovolená', eco: 'úsporný', comfort: 'komfort',
+    smart: 'chytrý', program: 'program', temp_auto: 'program', hot: 'topení', cold: 'chlazení',
+    power_off: 'vypnuto', power_on: 'zapnuto', last: 'poslední stav', open: 'otevřít', close: 'zavřít',
+    stop: 'stop', white: 'bílá', colour: 'barevná', scene: 'scéna', music: 'hudba',
+    relay: 'podle relé', pos: 'podle polohy', none: 'vypnuto', low: 'nízká', middle: 'střední', high: 'vysoká',
+  };
+  const label = code => (code in DP_LABELS ? DP_LABELS[code] : code.replace(/_/g, ' '));
+  const enumLabel = v => ENUM_LABELS[v] || v;
+  const HIDDEN_CODES = /^(factory_reset|colour_data.*|scene_data.*|flash_scene.*|music_data|control_data|countdown.*|cycle_time|random_time|switch_inching|week_program.*|program.*|temp_program.*|unlock_.*|.*_ticket.*|.*_record)$/;
+
+  function fmtValue(spec, value) {
+    if (!spec) return String(value);
+    const v = spec.values || {};
+    if (spec.type === 'Boolean') return value ? 'ano' : 'ne';
+    if (spec.type === 'Integer' || spec.type === 'Value') {
+      const n = Number(value) / 10 ** (v.scale || 0);
+      return `${n.toLocaleString('cs-CZ')}${v.unit ? ' ' + v.unit.replace('℃', '°C') : ''}`;
+    }
+    if (spec.type === 'Enum') return enumLabel(value);
+    return typeof value === 'object' ? JSON.stringify(value) : String(value);
+  }
+
+  async function sendCommand(dev, code, value, el) {
+    if (dev.sensitive && !confirm(`Opravdu změnit „${label(code)}“ u zařízení ${dev.name}?`)) return false;
+    if (el) el.disabled = true;
+    try {
+      await fnSendCommand({ deviceId: dev.id, code, value, confirm: dev.sensitive ? true : undefined });
+      tuyaStatusEl.textContent = `✔ ${dev.name}: ${label(code)} → ${typeof value === 'boolean' ? (value ? 'zapnuto' : 'vypnuto') : enumLabel(value)}`;
+      setTimeout(loadTuyaDevices, 1500); // Tuya potvrdí nový stav s malým zpožděním
+      return true;
+    } catch (err) {
+      alert(`Nepodařilo se ovládat ${dev.name}: ${err.message}`);
+      if (el) el.disabled = false;
+      return false;
     }
   }
 
@@ -238,54 +292,97 @@ if (!isConfigured) {
     }
     tuyaDevices.forEach(dev => {
       const li = document.createElement('li');
-      const statusSpan = document.createElement('span');
-      statusSpan.innerHTML = `<b>${dev.name}</b> <span class="dev-status ${dev.online ? 'online' : ''}">${dev.online ? 'online' : 'offline'}</span>`;
+      li.className = 'tuya-dev' + (dev.online ? '' : ' offline');
+      const statusMap = Object.fromEntries((dev.status || []).map(x => [x.code, x.value]));
+      const specMap = Object.fromEntries([...(dev.statusSpec || []), ...(dev.functions || [])].map(f => [f.code, f]));
+      const fnCodes = new Set((dev.functions || []).map(f => f.code));
+
+      const head = document.createElement('div');
+      head.className = 'dev-head';
+      head.innerHTML = `<b>${escapeHtml(dev.name)}</b>
+        <span class="dev-status ${dev.online ? 'online' : ''}">${dev.online ? '● online' : '○ offline'}</span>
+        ${dev.heating ? '<span class="dev-tag">scénáře</span>' : ''}
+        ${dev.sensitive ? '<span class="dev-tag warn">s potvrzením</span>' : ''}
+        ${dev.productName ? `<small class="dev-product">${escapeHtml(dev.productName)}</small>` : ''}`;
+      li.appendChild(head);
+
+      // Jen pro čtení – stavy, které nejdou ovládat (teplota, baterie, příkon…)
+      const readings = (dev.status || []).filter(x => !fnCodes.has(x.code) && !HIDDEN_CODES.test(x.code) && DP_LABELS[x.code] !== null && typeof x.value !== 'object');
+      if (readings.length) {
+        const r = document.createElement('div');
+        r.className = 'dev-readings';
+        r.innerHTML = readings.map(x => `<span><em>${escapeHtml(label(x.code))}:</em> ${escapeHtml(fmtValue(specMap[x.code], x.value))}</span>`).join('');
+        li.appendChild(r);
+      }
 
       const controls = document.createElement('div');
       controls.className = 'dev-controls';
-
-      const toggleBtn = document.createElement('button');
-      toggleBtn.textContent = dev.on ? 'Vypnout' : 'Zapnout';
-      toggleBtn.className = 'btn-mail';
-      toggleBtn.addEventListener('click', async () => {
-        toggleBtn.disabled = true;
-        try {
-          await fnSetDevice({ deviceId: dev.id, on: !dev.on });
-          await loadTuyaDevices();
-        } catch (err) {
-          alert('Nepodařilo se přepnout zařízení: ' + err.message);
-          toggleBtn.disabled = false;
+      (dev.functions || []).filter(f => !HIDDEN_CODES.test(f.code) && DP_LABELS[f.code] !== null).forEach(f => {
+        const cur = statusMap[f.code];
+        const v = f.values || {};
+        const wrap = document.createElement('label');
+        wrap.className = 'dev-ctl';
+        if (f.type === 'Boolean') {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'dev-toggle' + (cur ? ' on' : '');
+          btn.textContent = `${label(f.code)}: ${cur ? 'ZAP' : 'VYP'}`;
+          btn.disabled = !dev.online;
+          btn.addEventListener('click', () => sendCommand(dev, f.code, !cur, btn));
+          controls.appendChild(btn);
+          return;
+        }
+        if (f.type === 'Integer') {
+          const scale = v.scale || 0;
+          const inp = document.createElement('input');
+          inp.type = 'number';
+          inp.step = (v.step || 1) / 10 ** scale;
+          if (typeof v.min === 'number') inp.min = v.min / 10 ** scale;
+          if (typeof v.max === 'number') inp.max = v.max / 10 ** scale;
+          if (cur !== undefined) inp.value = Number(cur) / 10 ** scale;
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'btn-mail';
+          btn.textContent = 'Nastavit';
+          btn.disabled = !dev.online;
+          btn.addEventListener('click', () => {
+            const n = parseFloat(inp.value);
+            if (!Number.isNaN(n)) sendCommand(dev, f.code, n, btn);
+          });
+          wrap.append(`${label(f.code)}${v.unit ? ' (' + v.unit.replace('℃', '°C') + ')' : ''} `, inp, btn);
+          controls.appendChild(wrap);
+          return;
+        }
+        if (f.type === 'Enum' && Array.isArray(v.range)) {
+          const sel = document.createElement('select');
+          v.range.forEach(opt => {
+            const o = document.createElement('option');
+            o.value = opt; o.textContent = enumLabel(opt);
+            if (opt === cur) o.selected = true;
+            sel.appendChild(o);
+          });
+          sel.disabled = !dev.online;
+          sel.addEventListener('change', async () => {
+            const ok = await sendCommand(dev, f.code, sel.value, sel);
+            if (!ok) sel.value = cur;
+          });
+          wrap.append(`${label(f.code)} `, sel);
+          controls.appendChild(wrap);
         }
       });
-      controls.appendChild(toggleBtn);
-
-      if (dev.kind === 'thermostat') {
-        const tempInput = document.createElement('input');
-        tempInput.type = 'number';
-        tempInput.step = '0.5';
-        tempInput.value = dev.tempC ?? '';
-        tempInput.placeholder = '°C';
-        const tempBtn = document.createElement('button');
-        tempBtn.textContent = 'Nastavit °C';
-        tempBtn.className = 'btn-mail';
-        tempBtn.addEventListener('click', async () => {
-          const tempC = parseFloat(tempInput.value);
-          if (Number.isNaN(tempC)) return;
-          tempBtn.disabled = true;
-          try {
-            await fnSetDevice({ deviceId: dev.id, tempC });
-            await loadTuyaDevices();
-          } catch (err) {
-            alert('Nepodařilo se nastavit teplotu: ' + err.message);
-          }
-          tempBtn.disabled = false;
-        });
-        controls.append(tempInput, tempBtn);
+      if (controls.children.length) li.appendChild(controls);
+      if (dev.error) {
+        const e = document.createElement('small');
+        e.className = 'dev-status';
+        e.textContent = 'Chyba: ' + dev.error;
+        li.appendChild(e);
       }
-
-      li.append(statusSpan, controls);
       tuyaDevicesEl.appendChild(li);
     });
+  }
+
+  function escapeHtml(t) {
+    return String(t ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   }
 
   async function runScenario(scenario, btn) {
@@ -306,6 +403,8 @@ if (!isConfigured) {
 
   btnScenarioArrival.addEventListener('click', () => runScenario('arrival', btnScenarioArrival));
   btnScenarioDeparture.addEventListener('click', () => runScenario('departure', btnScenarioDeparture));
+  const btnTuyaRefresh = document.getElementById('btn-tuya-refresh');
+  if (btnTuyaRefresh) btnTuyaRefresh.addEventListener('click', loadTuyaDevices);
 
   function listenScenarioLog() {
     const q = query(collection(db, 'scenario_log'), orderBy('runAt', 'desc'), limit(5));
