@@ -13,7 +13,7 @@
   --text:         #2a2b23;
   --text-soft:    #55584c;
   --white:        #ffffff;
-  --shadow:       0 10px 30px rgba(28,58,41,.15);
+  --shadow:       none;
   --radius:       14px;
   --maxw:         1180px;
   --serif: "Georgia", "Iowan Old Style", "Times New Roman", serif;
@@ -62,13 +62,11 @@ section.alt{ background:var(--cream-2); }
 .bullet-3d{
   display:inline-block; flex:none; width:.62em; height:.62em; border-radius:50%;
   background: radial-gradient(circle at 32% 28%, #f3dfc0 0%, var(--wood) 48%, var(--wood-dark) 100%);
-  box-shadow: 0 1px 2px rgba(0,0,0,.35), inset 0 1px 1px rgba(255,255,255,.55);
   vertical-align:middle; margin-right:.1em;
 }
 .bullet-3d-lg{
   width:22px; height:22px; border-radius:50%;
   background: radial-gradient(circle at 32% 28%, #f3dfc0 0%, var(--wood) 48%, var(--wood-dark) 100%);
-  box-shadow: 0 2px 4px rgba(0,0,0,.3), inset 0 1px 2px rgba(255,255,255,.6);
 }
 
 /* ---------- Header ---------- */
@@ -107,7 +105,6 @@ nav.main-nav a:hover{ color:var(--white); }
     padding:12px 24px 32px; overflow-y:auto; overscroll-behavior:contain;
     opacity:0; visibility:hidden; transform:translateY(-10px);
     transition:opacity .25s ease, transform .25s ease, visibility 0s linear .25s;
-    box-shadow:0 12px 24px rgba(0,0,0,.25);
   }
   nav.main-nav.open{ opacity:1; visibility:visible; transform:none; transition:opacity .25s ease, transform .25s ease; }
   nav.main-nav a{ display:block; font-size:1.15rem; padding:16px 4px; border-bottom:1px solid rgba(255,255,255,.12); }
@@ -140,7 +137,7 @@ nav.main-nav a:hover{ color:var(--white); }
   text-align:center; color:var(--white); margin-top:6px;
 }
 .hero-weather .place{ display:block; font-size:.72rem; text-transform:uppercase; letter-spacing:.09em; color:var(--cream-2); margin-bottom:10px; }
-.hero-weather .icon{ width:84px; height:84px; margin:0 auto 8px; filter:drop-shadow(0 3px 6px rgba(0,0,0,.25)); }
+.hero-weather .icon{ width:84px; height:84px; margin:0 auto 8px; }
 .hero-weather .icon svg{ display:block; }
 .hero-weather .temp{ font-family:var(--serif); font-size:2.4rem; line-height:1; color:var(--white); }
 .hero-weather .desc{ font-size:.82rem; color:var(--cream-2); margin-top:8px; }
@@ -190,7 +187,7 @@ nav.main-nav a:hover{ color:var(--white); }
 /* lightbox */
 .lightbox{ position:fixed; inset:0; background:rgba(10,18,13,.92); display:none; align-items:center; justify-content:center; z-index:2000; padding:30px; }
 .lightbox.open{ display:flex; }
-.lightbox img{ max-width:92vw; max-height:84vh; border-radius:8px; box-shadow:0 20px 60px rgba(0,0,0,.5); filter:var(--photo-filter); }
+.lightbox img{ max-width:92vw; max-height:84vh; border-radius:8px; filter:var(--photo-filter); }
 .lightbox-close, .lightbox-nav{ position:absolute; background:rgba(255,255,255,.12); border:0; color:var(--white); width:46px; height:46px; border-radius:50%; font-size:1.4rem; cursor:pointer; display:flex; align-items:center; justify-content:center; }
 .lightbox-close{ top:22px; right:22px; }
 .lightbox-nav.prev{ left:22px; top:50%; transform:translateY(-50%); }
@@ -223,7 +220,7 @@ nav.main-nav a:hover{ color:var(--white); }
 .legend-dot{ width:12px; height:12px; border-radius:50%; display:inline-block; }
 
 /* custom leaflet marker */
-.kv-pin{ width:30px; height:30px; border-radius:50% 50% 50% 0; transform:rotate(-45deg); display:flex; align-items:center; justify-content:center; box-shadow:0 3px 8px rgba(0,0,0,.35); border:2px solid #fff; }
+.kv-pin{ width:30px; height:30px; border-radius:50% 50% 50% 0; transform:rotate(-45deg); display:flex; align-items:center; justify-content:center; border:2px solid #fff; }
 .kv-pin span{ transform:rotate(45deg); font-size:15px; }
 .kv-pin.home{ background:var(--wood); }
 .kv-pin.nature{ background:var(--green); }
@@ -267,7 +264,6 @@ nav.main-nav a:hover{ color:var(--white); }
 /* ---------- Aktuality ---------- */
 .news-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
 .news-card{ background:var(--white); border-radius:var(--radius); box-shadow:var(--shadow); padding:24px; text-decoration:none; display:block; border-left:4px solid var(--green); }
-.news-card:hover{ box-shadow:0 16px 34px rgba(28,58,41,.22); }
 .news-card .src{ font-size:.72rem; text-transform:uppercase; letter-spacing:.1em; color:var(--wood); font-weight:700; margin-bottom:8px; display:block; }
 .news-card h4{ margin-bottom:6px; font-size:1.02rem; }
 .news-card p{ font-size:.85rem; color:var(--text-soft); margin:0; }
